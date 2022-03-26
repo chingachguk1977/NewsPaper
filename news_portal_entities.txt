@@ -1,36 +1,48 @@
-CREATE TABLE ARTICLES (
-    article_id INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE AUTHOR (
+    author_id INT AUTO_INCREMENT NOT NULL,
+    author_name CHAR(40) NOT NULL, #cвязь «один к одному» с встроенной моделью пользователей User;
+    author_rating FLOAT NOT NULL, #рейтинг пользователя.
+
+    PRIMARY KEY (author_id)
+);
+
+CREATE TABLE CATEGORY (
+    cat_id INT AUTO_INCREMENT NOT NULL,
+    cat_name CHAR(40) NOT NULL, #Имеет единственное поле: название категории.
+
+    PRIMARY KEY (cat_id)
+);
+
+CREATE TABLE POST (
+    post_id INT AUTO_INCREMENT NOT NULL,
+    post_type INT NOT NULL,
     time_pub DATETIME NOT NULL,
-    author CHAR(50) NOT NULL,
+    post_title TEXT NOT NULL,
+    post_body TEXT NOT NULL,
+    post_rating FLOAT NOT NULL,
+    author INT NOT NULL,
+    category INT NOT NULL,
 
-    PRIMARY KEY (article_id)
-    FOREIGN KEY (staff) REFERENCES STAFF (staff_id)
+    PRIMARY KEY (post_id),
+    FOREIGN KEY (author) REFERENCES AUTHOR (author_id), #связь «один ко многим» с моделью Author;
 );
 
-CREATE TABLE PRODUCTS (
-    product_id INT AUTO_INCREMENT NOT NULL,
-    name CHAR(255) NOT NULL,
-    price FLOAT NOT NULL
+CREATE TABLE POST_CATEGORY (
+    post INT NOT NULL,
+    category INT NOT NULL,
 
-    PRIMARY KEY (product_id)
+    FOREIGN KEY (post) REFERENCES POST (post_id), #связь «один ко многим» с моделью Post;
+    FOREIGN KEY (category) REFERENCES CATEGORY (cat_id) #связь «один ко многим» с моделью Category;
 );
 
-CREATE TABLE STAFF (
-    staff_id INT AUTO_INCREMENT NOT NULL,
-    full_name CHAR(255) NOT NULL,
-    position CHAR(255) NOT NULL,
-    labor_contract INT NOT NULL
+CREATE TABLE COMMENT (
+    comment_id INT AUTO_INCREMENT NOT NULL,
+    comment_body TEXT NOT NULL, #текст комментария;
+    comment_time DATETIME NOT NULL, #дата и время создания комментария;
+    comment_rating FLOAT NOT NULL, #рейтинг комментария.
+    post INT NOT NULL,
 
-    PRIMARY KEY (staff_id)
-);
-
-CREATE TABLE PRODUCTS_ORDERS (
-    product_order_id INT AUTO_INCREMENT NOT NULL,
-    product INT NOT NULL,
-    in_order INT NOT NULL,
-    amount INT NOT NULL,
-
-    PRIMARY KEY (product_order_id),
-    FOREIGN KEY (product) REFERENCES PRODUCTS (product_id),
-    FOREIGN KEY (in_order) REFERENCES ORDERS (order_id)
+    PRIMARY KEY (comment_id),
+    FOREIGN KEY (post) REFERENCES POST (post_id), #связь «один ко многим» с моделью Post;
+    #связь «один ко многим» со встроенной моделью User
 );
