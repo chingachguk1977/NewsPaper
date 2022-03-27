@@ -34,13 +34,19 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category, through='PostCategory')
 
     def like(self):
-        ...
+        self.post_rating += 1
+        self.save()
+        return self.post_rating
 
     def dislike(self):
-        ...
+        self.post_rating -= 1
+        self.save()
+        return self.post_rating
 
     def preview(self):
-        ...
+        if len(self.post_body) > 124:
+            return self.post_body[:124] + '...'
+        return self.post_body
 
 
 class Comment(models.Model):
@@ -51,10 +57,14 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def like(self):
-        ...
+        self.comment_rating += 1
+        self.save()
+        return self.comment_rating
 
     def dislike(self):
-        ...
+        self.comment_rating -= 1
+        self.save()
+        return self.comment_rating
 
 
 class PostCategory(models.Model):
