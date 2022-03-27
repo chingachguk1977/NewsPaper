@@ -18,6 +18,13 @@ class Author(models.Model):
         commentRat = self.user.comment_set.all().aggregate(comment_rating=Sum('comment_rating'))
         cRat = 0
         cRat += commentRat.get('comment_rating')
+        
+        author_posts = self.post_set.all()
+        for p in author_posts:                      
+            self.rating += p.rating * 3         
+            p_comments = p.comment_set.all()
+            for c in p_comments:               
+                self.rating += c.rating  
 
 
 class Category(models.Model):
