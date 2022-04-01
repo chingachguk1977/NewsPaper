@@ -28,7 +28,6 @@ class Author(models.Model):
         #         self.rating += comment.rating
 
         self.save()
-
         return self.rating
 
     def __str__(self):
