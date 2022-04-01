@@ -1,0 +1,109 @@
+from news.models import *
+
+# создаём юзеров
+user1 = User.objects.create_user(username='John Doe') 
+user2 = User.objects.create_user(username='Bill Smith')
+
+# достаём юзеров, если уже есть в базе
+user1 = User.objects.get(username='John Doe') 
+user2 = User.objects.get(username='Bill Smith')
+
+# создаём авторов
+author1 = Author.objects.create(user=user1) 
+author2 = Author.objects.create(user=user2)
+
+# достаём авторов, если уже есть в базе
+author1 = Author.objects.get(user=user1) 
+author2 = Author.objects.get(user=user2)
+
+# создаём категории
+cat1 = Category.objects.create(cat_name='Sport') 
+cat2 = Category.objects.create(cat_name='Politics') 
+cat3 = Category.objects.create(cat_name='Auto')   
+cat4 = Category.objects.create(cat_name='Art')
+
+# достаём категории, если уже есть в базе
+cat1 = Category.objects.get(cat_name='Sport') 
+cat2 = Category.objects.get(cat_name='Politics') 
+cat3 = Category.objects.get(cat_name='Auto')   
+cat4 = Category.objects.get(cat_name='Art')
+
+# создаём посты
+post1 = Post.objects.create(type='AR',
+                            title='This is Title One',
+							body='This is the body of article post1, it is about sport and automobiles.',
+							author=author1)
+post2 = Post.objects.create(type='AR',
+                            title='This is Title Two',
+							body='This is the body of article post2, it is about art.',
+							author=author1)
+post3 = Post.objects.create(title='This is Title Three', 
+							body='This is the body of news post3, it is about the stupid haircut of Boris Johnson.', 
+							author=author2)
+
+# достаём посты
+post1 = Post.objects.get(title='This is Title One')
+post2 = Post.objects.get(title='This is Title Two')
+post3 = Post.objects.get(title='This is Title Three')
+
+# назначаем постам категории							
+post1.cats.add(cat1, cat3)
+post2.cats.add(cat4)
+post3.cats.add(cat2)
+
+# создаём комменты к постам и комментам
+comment1 = Comment.objects.create(post=post1, user=user1, body='This is comment 1 by user1 to post 1')
+comment2 = Comment.objects.create(post=post1, user=user2, body='This is comment 1 by user2 to post 1')
+comment3 = Comment.objects.create(post=post2, user=user1, body='This is comment 1 by user1 to post 2')
+comment4 = Comment.objects.create(post=post2, user=user2, body='This is comment 1 by user2 to post 2')
+comment5 = Comment.objects.create(post=post3, user=user1, body='This is comment 1 by user1 to post 3')
+comment6 = Comment.objects.create(post=post3, user=user2, body='This is comment 1 by user2 to post 3')
+comment7 = Comment.objects.create(post=post1, user=user1, body='This is comment 2 by user1 to post 1')
+comment8 = Comment.objects.create(post=post1, user=user2, body='This is comment 2 by user2 to post 1')
+comment9 = Comment.objects.create(post=post2, user=user1, body='This is comment 2 by user1 to post 2')
+comment10 = Comment.objects.create(post=post2, user=user2, body='This is comment 2 by user2 to post 2')
+comment11 = Comment.objects.create(post=post3, user=user1, body='This is comment 2 by user1 to post 3')
+comment12 = Comment.objects.create(post=post3, user=user2, body='This is comment 2 by user2 to post 3')
+
+# ставим лайки/дизы комментам и постам
+comment1.like()
+comment2.like()
+comment3.dislike()
+comment4.like()
+comment5.like()
+comment7.like()
+comment8.like()
+comment10.like()
+comment9.like()
+comment12.like()
+comment6.like()
+comment1.like()
+comment3.dislike()
+comment5.dislike()
+comment4.dislike()
+comment11.dislike()
+post1.like()
+post1.like()
+post2.like()
+post1.like()
+post3.like()
+post1.like()
+post2.dislike()
+post2.like()
+post3.like()
+post3.like()
+post1.like()
+post3.like()
+post3.dislike()
+post1.dislike()
+post2.dislike()
+post1.like()
+post1.like()
+post1.like()
+post3.like()
+
+# апдейтим рейтинг авторов
+author1.update_rating()
+author2.update_rating()
+author3.update_rating()
+
