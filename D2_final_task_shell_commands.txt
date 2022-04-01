@@ -4,7 +4,7 @@ from news.models import *
 user1 = User.objects.create_user(username='John Doe') 
 user2 = User.objects.create_user(username='Bill Smith')
 
-# достаём юзеров, если уже есть в базе
+# ИЛИ достаём юзеров, если уже есть в базе
 user1 = User.objects.get(username='John Doe') 
 user2 = User.objects.get(username='Bill Smith')
 
@@ -12,7 +12,7 @@ user2 = User.objects.get(username='Bill Smith')
 author1 = Author.objects.create(user=user1) 
 author2 = Author.objects.create(user=user2)
 
-# достаём авторов, если уже есть в базе
+# ИЛИ достаём авторов, если уже есть в базе
 author1 = Author.objects.get(user=user1) 
 author2 = Author.objects.get(user=user2)
 
@@ -22,7 +22,7 @@ cat2 = Category.objects.create(cat_name='Politics')
 cat3 = Category.objects.create(cat_name='Auto')   
 cat4 = Category.objects.create(cat_name='Art')
 
-# достаём категории, если уже есть в базе
+# ИЛИ достаём категории, если уже есть в базе
 cat1 = Category.objects.get(cat_name='Sport') 
 cat2 = Category.objects.get(cat_name='Politics') 
 cat3 = Category.objects.get(cat_name='Auto')   
@@ -41,7 +41,7 @@ post3 = Post.objects.create(title='This is Title Three',
 							body='This is the body of news post3, it is about the stupid haircut of Boris Johnson.', 
 							author=author2)
 
-# достаём посты
+# ИЛИ достаём посты из базы
 post1 = Post.objects.get(title='This is Title One')
 post2 = Post.objects.get(title='This is Title Two')
 post3 = Post.objects.get(title='This is Title Three')
@@ -105,5 +105,15 @@ post3.like()
 # апдейтим рейтинг авторов
 author1.update_rating()
 author2.update_rating()
-author3.update_rating()
 
+# Вывод рейтинг Author с наибольшим количеством оценок
+best_author = Author.objects.all().order_by('-rating').values('user', 'rating')[0]
+Author.objects.get(rating=best_author['rating'])
+
+# Вывод статьи\новости с наибольшим рейтингом
+best_post = Post.objects.all().order_by('-rating').values('time_pub', 'author', 'rating', 'title', 'body')[0]
+the_post = Post.objects.get(rating=best_post['rating'])
+the_post
+
+best_post_comments = the_post.comment_set.all()
+best_post_comments
