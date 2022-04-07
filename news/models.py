@@ -75,7 +75,7 @@ class Post(models.Model):
     def preview(self):
         if len(self.body) > 124:
             return f'{self.body[:124]}...'
-        return self.body[:124]
+        return self.body
 
 
 class Comment(models.Model):
