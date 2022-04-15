@@ -1,12 +1,15 @@
 <!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
 {% extends 'flatpages/default.html' %}
 
-<!-- Название у нас будет products -->
+{% load custom_filters %}
+
+
+<!-- Название у нас будет Posts -->
 {% block title %}
 Posts
 {% endblock title %}
 
-<!-- В контенте на странице мы выводим все товары -->
+<!-- В контенте на странице мы выводим все посты -->
 {% block content %}
 <h1>There are {{ posts|length }} News</h1>
 
@@ -17,13 +20,17 @@ Posts
             <td>Title</td>
             <td>Date</td>
             <td>Preview</td>
+            <td>Category</td>
+            <td>Rating</td>
         </tr>
 
         {% for post in posts %}
             <tr>
-                <td>{{ post.title }}</td>
+                <td>{{ post.title|censor }}</td>
                 <td>{{ post.time_pub|date:'d M Y' }}</td>
-                <td>{{ post.body|truncatewords:20 }}</td>
+                <td>{{ post.body|truncatechars:20|censor }}</td>
+                <td>{% for cat in post.cats.all %} {{ cat }} {% endfor %}</td>
+                <td>{{ post.rating }}</td>
             </tr>
         {% endfor %}
     </table>

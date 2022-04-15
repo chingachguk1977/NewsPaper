@@ -1,6 +1,6 @@
 from django.urls import path
 # Импортируем созданное нами представление
-from .views import PostsList, PostDetail
+from .views import PostsList, PostDetail, CategoryDetail
 
 
 urlpatterns = [

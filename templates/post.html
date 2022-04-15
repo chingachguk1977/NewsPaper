@@ -1,12 +1,15 @@
 <!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
 {% extends 'flatpages/default.html' %}
 
+{% load custom_filters %}
+
 {% block title %}
 Post
 {% endblock title %}
 
 {% block content %}
-<h3>{{ post.title }}</h3
-<h4>Published on: {{ post.time_pub|date:'d M Y' }}</h4>
-<h5>{{ post.body }}</h5>
+<h2>{{ post.title|censor }}</h2
+<h3>{{ post.body|censor }}</h3>
+<h6>Published on: {{ post.time_pub|date:'d M Y' }}</h6>
+<h6>Categories: {% for cat in post.cats.all %} {{ cat }}, {% endfor %}</h6>
 {% endblock content %}
