@@ -39,10 +39,11 @@ class CategoryDetail(DetailView):
         context['post_category'] = PostCategory.objects.get(post=self.kwargs['pk']).cats
         return context
 
+
 """
 class CommentDetail(DetailView):
     model = Comment
     ordering = '-datetime'
-    template_name = 'post.html' # это здесь надо?
+    template_name = 'post.html' #TODO это здесь надо?
     context_object_name = 'comments'
 """
