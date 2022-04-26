@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Author, Post, PostCategory, Comment, Category
 from datetime import datetime
+from .models import Post
+from .filters import PostFilter
 
 
 # Create your views here.
@@ -10,11 +12,25 @@ class PostsList(ListView):
     ordering = 'time_pub'
     template_name = 'posts.html'
     context_object_name = 'posts'
+    paginate_by = 5
+
+    # Переопределяем функцию получения списка постов
+    def get_queryset(self):
+        # Получаем обычный запрос
+        queryset = super().get_queryset()
+        # Используем наш класс фильтрации.
+        # self.request.GET содержит объект QueryDict, который мы рассматривали ранее.
+        # Сохраняем нашу фильтрацию в объекте класса,
+        # чтобы потом добавить в контекст и использовать в шаблоне.
+        self.filterset = PostFilter(self.request.GET, queryset)
+        # Возвращаем из функции отфильтрованный список товаров
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category_name'] = Category.objects.all()
         context['time_now'] = datetime.utcnow()
+        context['filterset'] = self.filterset
         return context
 
 
@@ -38,12 +54,3 @@ class CategoryDetail(DetailView):
         # Контекст постов данной категории.
         context['post_category'] = PostCategory.objects.get(post=self.kwargs['pk']).cats
         return context
-
-
-"""
-class CommentDetail(DetailView):
-    model = Comment
-    ordering = '-datetime'
-    template_name = 'post.html' #TODO это здесь надо?
-    context_object_name = 'comments'
-"""
