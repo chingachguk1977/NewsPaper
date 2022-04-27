@@ -1,9 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Author, Post, PostCategory, Comment, Category
 from datetime import datetime
 from .models import Post
 from .filters import PostFilter
+from .forms import PostForm
 
 
 # Create your views here.
@@ -54,3 +56,15 @@ class CategoryDetail(DetailView):
         # Контекст постов данной категории.
         context['post_category'] = PostCategory.objects.get(post=self.kwargs['pk']).cats
         return context
+
+
+def create_post(request):
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/posts')
+
+    form = PostForm()
+    return render(request, 'post_create.html', {'form': form})
