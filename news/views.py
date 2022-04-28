@@ -1,8 +1,16 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView)
 from .models import Author, Post, PostCategory, Comment, Category
+
 from datetime import datetime
+from django.urls import reverse_lazy
+
 from .models import Post
 from .filters import PostFilter
 from .forms import PostForm
@@ -58,6 +66,30 @@ class CategoryDetail(DetailView):
         return context
 
 
+# Добавляем новое представление для создания товаров.
+class PostCreate(CreateView):
+    # Указываем нашу разработанную форму
+    form_class = PostForm
+    # модель товаров
+    model = Post
+    # и новый шаблон, в котором используется форма.
+    template_name = 'post_edit.html'
+
+
+class PostUpdate(UpdateView):
+    form_class = PostForm
+    model = Post
+    template_name = 'post_edit.html'
+
+
+# Представление удаляющее товар.
+class PostDelete(DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('post_list')
+
+
+# TODO Везде расписать комменты, какая команда что делает
 def create_post(request):
     form = PostForm()
     if request.method == 'POST':
@@ -66,5 +98,4 @@ def create_post(request):
             form.save()
             return HttpResponseRedirect('/posts')
 
-    form = PostForm()
     return render(request, 'post_create.html', {'form': form})

@@ -3,6 +3,7 @@ from django.db import models
 from datetime import datetime, date, time
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.urls import reverse
 
 
 class Author(models.Model):
@@ -76,6 +77,9 @@ class Post(models.Model):
         if len(self.body) > 124:
             return f'{self.body[:124]}...'
         return f'{self.body}'
+
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
 
 
 class Comment(models.Model):
