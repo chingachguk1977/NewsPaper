@@ -21,7 +21,7 @@ Post
 
     {% for comment in post.comment_set.all  %}
 
-        {{ comment }}
+        {{ comment|censor }}
         <hr><br>
 
     {% endfor %}
