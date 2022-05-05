@@ -33,7 +33,7 @@ class PostsList(ListView):
         # Сохраняем нашу фильтрацию в объекте класса,
         # чтобы потом добавить в контекст и использовать в шаблоне.
         self.filterset = PostFilter(self.request.GET, queryset)
-        # Возвращаем из функции отфильтрованный список товаров
+        # Возвращаем из функции отфильтрованный список
         return self.filterset.qs
 
     def get_context_data(self, **kwargs):
@@ -41,6 +41,7 @@ class PostsList(ListView):
         context['category_name'] = Category.objects.all()
         context['time_now'] = datetime.utcnow()
         context['filterset'] = self.filterset
+        context['qs_len'] = len(Post.objects.all())
         return context
 
 
@@ -66,14 +67,16 @@ class CategoryDetail(DetailView):
         return context
 
 
-# Добавляем новое представление для создания товаров.
+# Добавляем новое представление для создания постов.
 class PostCreate(CreateView):
-    # Указываем нашу разработанную форму
     form_class = PostForm
-    # модель товаров
     model = Post
-    # и новый шаблон, в котором используется форма.
     template_name = 'post_edit.html'
+
+    # def form_valid(self, form):
+    #     post = form.save(commit=False)
+    #     post.type = 'AR'
+    #     return super().form_valid(form)
 
 
 class PostUpdate(UpdateView):
@@ -89,6 +92,10 @@ class PostDelete(DeleteView):
     success_url = reverse_lazy('post_list')
 
 
+class PostSearchView(PostsList):
+    template_name = 'post_search.html'
+
+
 # TODO Везде расписать комменты, какая команда что делает
 def create_post(request):
     form = PostForm()
@@ -99,3 +106,4 @@ def create_post(request):
             return HttpResponseRedirect('/posts')
 
     return render(request, 'post_create.html', {'form': form})
+

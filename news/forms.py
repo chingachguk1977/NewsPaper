@@ -31,3 +31,11 @@ class PostForm(forms.ModelForm):
                 "Название не должно совпадать с основным текстом."
             )
         return cleaned_data
+
+
+# class DateInput(forms.DateInput):
+#     input_type = 'date'
+
+
+# class CalendarForm(forms.Form):
+#     filter_date_field = forms.DateField(widget=forms.DateInput)

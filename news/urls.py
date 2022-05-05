@@ -7,7 +7,9 @@ from .views import (
    CategoryDetail,
    create_post,
    PostUpdate,
-   PostDelete)
+   PostDelete,
+   PostSearchView)
+
 
 urlpatterns = [
    # path — означает путь.
@@ -22,4 +24,5 @@ urlpatterns = [
    path('create/', PostCreate.as_view(), name='post_create'),
    path('<int:pk>/update/', PostUpdate.as_view(), name='post_update'),
    path('<int:pk>/delete/', PostDelete.as_view(), name='post_delete'),
+   path('search/', PostSearchView.as_view(), name='post_search'),
 ]

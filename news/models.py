@@ -31,8 +31,17 @@ class Author(models.Model):
         self.save()
         return self.rating
 
+    # Возвращает автора с лучшим рейтингом
+    @staticmethod
+    def best_author():
+        return Author.objects.all().order_by('-rating')[0]
+
     def __str__(self):
         return f'{self.user.username}, rating = {self.rating}'
+
+    class Meta:
+        verbose_name = 'Author'
+        verbose_name_plural = verbose_name + 's'
 
 
 class Category(models.Model):
@@ -40,6 +49,10 @@ class Category(models.Model):
 
     def __str__(self):
         return f'{self.cat_name}'
+
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
 
 
 class Post(models.Model):
