@@ -42,6 +42,7 @@
             <th>Preview</th>
             <th>Category</th>
             <th>Rating</th>
+            <th># of comments</th>
         </tr>
       </thead>
       <tbody>
@@ -52,6 +53,7 @@
                 <td>{{ post.body|truncatechars:30|censor }}</td>
                 <td>{% for cat in post.cats.all %} {{ cat }} {% endfor %}</td>
                 <td>{{ post.rating }}</td>
+                <td>{{ post.comment_set.all|length }}</td>
             </tr>
         {% endfor %}
       </tbody>

@@ -75,7 +75,8 @@ class Post(models.Model):
     def __str__(self):
         post_metadata = f"'{self.title}' by {self.author.user.username},\n \
                           published on: {self.time_pub.strftime('%d/%m/%Y, %H:%M')},\n \
-                          the rating of this post is {self.rating}\nPreview: {self.preview()}"
+                          the rating of this post is {self.rating}\nPreview: {self.preview()}.\n \
+                          It has {len(self.comment_set)} comments."
         return post_metadata
 
     def like(self):

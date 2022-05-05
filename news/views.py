@@ -11,7 +11,6 @@ from .models import Author, Post, PostCategory, Comment, Category
 from datetime import datetime
 from django.urls import reverse_lazy
 
-from .models import Post
 from .filters import PostFilter
 from .forms import PostForm
 
@@ -64,6 +63,7 @@ class CategoryDetail(DetailView):
         context['category_post'] = Post.objects.filter(post_category=id)
         # Контекст постов данной категории.
         context['post_category'] = PostCategory.objects.get(post=self.kwargs['pk']).cats
+        context['comments'] = Post.comment_set.all()
         return context
 
 
@@ -106,4 +106,3 @@ def create_post(request):
             return HttpResponseRedirect('/posts')
 
     return render(request, 'post_create.html', {'form': form})
-
