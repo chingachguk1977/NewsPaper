@@ -10,6 +10,7 @@ WORDS_TO_CATCH = [
     'Automobile',
     'about',
     'post1',
+    'comment',
     'is',
     'one',
 ]

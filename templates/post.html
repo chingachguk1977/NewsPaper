@@ -22,7 +22,7 @@ Post
     {% for comment in post.comment_set.all  %}
 
         {{ comment.user.username }} wrote: {{ comment.body|censor }}
-        on: {{ comment.time_pub }}. The rating of the comment is {{ comment.rating }}.
+        on: {{ comment.time_pub }} The rating of the comment is {{ comment.rating }}.
 
         <hr><br>
 

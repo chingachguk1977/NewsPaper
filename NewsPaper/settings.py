@@ -105,7 +105,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_URL = []
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/profiles/profile_update/'
 
 
 # Internationalization

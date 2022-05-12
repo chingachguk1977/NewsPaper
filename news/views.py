@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import (
@@ -14,13 +15,10 @@ from datetime import datetime
 from django.urls import reverse_lazy
 
 from .filters import PostFilter
-from .forms import PostForm
+from .forms import PostForm, UserForm
 
 
 # Create your views here.
-class ProtectedView(LoginRequiredMixin, TemplateView):
-    template_name = 'protected_page.html'
-
 
 class PostsList(ListView):
     model = Post
@@ -91,6 +89,17 @@ class PostUpdate(UpdateView):
     template_name = 'post_edit.html'
 
 
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'profile_update.html'
+    form_class = UserForm
+    success_url = '/posts/'
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+
+    def get_object(self, **kwargs):
+        return self.request.user
+
+
 # Представление удаляющее товар.
 class PostDelete(DeleteView):
     model = Post
@@ -112,3 +121,15 @@ def create_post(request):
             return HttpResponseRedirect('/posts')
 
     return render(request, 'post_create.html', {'form': form})
+
+
+class ProtectedView(LoginRequiredMixin, UpdateView):
+    template_name = 'protected_page.html'
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+#
+#
+# def profile_edit(request):
+#     template_name = 'profile_update.html'
+#     form = UserForm
+#     return render(request, template_name, {'form': form})
