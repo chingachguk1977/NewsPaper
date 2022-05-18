@@ -4,9 +4,13 @@
 {% block title %}Update profile{% endblock title %}
 
 {% block content %}
-<form method="POST">
+<h1>Profile</h1>
+<hr>
+
+<form action="" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Update profile">
+    <input type="submit" value="Update profile" />
 </form>
+<hr>
 {% endblock content %}

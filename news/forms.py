@@ -36,19 +36,9 @@ class PostForm(forms.ModelForm):
         return cleaned_data
 
 
-class UserForm(ModelForm):
-    class Meta:
-        model = User
 
-        fields = [
-            'username',
-            'password',
-            'email',
-            'first_name',
-            'last_name',
-        ]
-
-
-class AuthenticationFormWithInactiveUsersOkay(AuthenticationForm):
-    def confirm_login_allowed(self, user):
-        pass
+#
+#
+# class AuthenticationFormWithInactiveUsersOkay(AuthenticationForm):
+#     def confirm_login_allowed(self, user):
+#         pass

@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -15,13 +15,16 @@ from datetime import datetime
 from django.urls import reverse_lazy
 
 from .filters import PostFilter
-from .forms import PostForm, UserForm
+from .forms import PostForm
 
 
 # Create your views here.
 
-class PostsList(ListView):
+class PostsList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Post
+    permission_required = (
+        'news.view_post',
+    )
     ordering = 'time_pub'
     template_name = 'posts.html'
     context_object_name = 'posts'
@@ -48,9 +51,12 @@ class PostsList(ListView):
         return context
 
 
-class PostDetail(DetailView):
+class PostDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Post
     template_name = 'post.html'
+    permission_required = (
+        'news.view_post',
+    )
     context_object_name = 'post'
 
 
@@ -72,9 +78,12 @@ class CategoryDetail(DetailView):
 
 
 # Добавляем новое представление для создания постов.
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
+    permission_required = (
+        'news.add_post',
+    )
     template_name = 'post_edit.html'
 
     # def form_valid(self, form):
@@ -83,26 +92,32 @@ class PostCreate(CreateView):
     #     return super().form_valid(form)
 
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = PostForm
     model = Post
+    permission_required = (
+        'news.change_post',
+    )
     template_name = 'post_edit.html'
 
 
-class ProfileUpdate(LoginRequiredMixin, UpdateView):
-    template_name = 'profile_update.html'
-    form_class = UserForm
-    success_url = '/posts/'
-    login_url = '/login/'
-    redirect_field_name = 'redirect_to'
-
-    def get_object(self, **kwargs):
-        return self.request.user
+# class ProfileUpdate(LoginRequiredMixin, UpdateView):
+#     template_name = 'profile_update.html'
+#     form_class = UserForm
+#     success_url = '/posts/'
+#     login_url = '/accounts/login/'
+#     redirect_field_name = 'redirect_to'
+#
+#     def get_object(self, **kwargs):
+#         return self.request.user
 
 
 # Представление удаляющее товар.
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Post
+    permission_required = (
+        'news.change_post',
+    )
     template_name = 'post_delete.html'
     success_url = reverse_lazy('post_list')
 
