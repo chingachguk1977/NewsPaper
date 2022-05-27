@@ -15,10 +15,12 @@ class BasicSignupForm(SignupForm):
 class UpdateProfileForm(ModelForm):
     class Meta:
         model = User
-
+        # тут добавляем поля на форму апдейта профиля (profile_update.html)
         fields = [
             'username',
             'email',
             'first_name',
             'last_name',
+            'is_staff',
+            'groups',
         ]

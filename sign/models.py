@@ -16,5 +16,6 @@ class BaseRegisterForm(UserCreationForm):
                   "email",
                   "password1",
                   "password2",
+                  "is_staff",
                   )
 

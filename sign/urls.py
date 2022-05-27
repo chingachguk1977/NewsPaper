@@ -3,6 +3,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .views import BaseRegisterView, ProfileUpdateView
 from .views import upgrade_me
 
+app_name = 'sign'
+
 urlpatterns = [
     path('login/',
          LoginView.as_view(template_name='sign/login.html'),

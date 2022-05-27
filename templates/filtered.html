@@ -9,17 +9,17 @@
 
 <h3 class="content-subhead">
   Found
-  {{filter.qs|length}} posts on query:
+  {{ filter.qs|length }} posts on query:
   <span>{{ name }}</span>
 </h3>
 
-{% if cat_name.id %}
+{% if name.id %}
 <div class="subscribe">
   <strong>
     Subscribe to
-    <em>{{ cat_name }}</em>?
+    <em>{{ name }}</em>?
   </strong>
-  <a href="{% url 'sub_cat' cat_name.id %}">
+  <a href="{% url 'news:sub_cat' name.id %}">
     <button class="pure-button button-success">
       <i class="bi bi-bookmark-plus"></i>
       Subscribe
