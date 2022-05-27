@@ -10,7 +10,7 @@ Post
 {% block content %}
 <h2>{{ post.title|censor }}</h2
 <h3>{{ post.body|censor }}</h3>
-<h4>Published on: {{ post.time_pub|date:'d M Y' }}</h4>
+<h4>Published on: {{ post.time_pub|date:'d M Y H:i' }}</h4>
 <h5>By: {{ post.author }}</h5>
 <h6>Categories: {% for cat in post.cats.all %} {{ cat }} : {% endfor %}</h6>
 <hr>

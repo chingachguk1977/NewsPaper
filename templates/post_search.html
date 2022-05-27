@@ -43,11 +43,14 @@
         </tr>
 {% for post in posts %}
         <tr>
-                <td><a href="{{ post.get_absolute_url }}">{{ post.title|censor }}</td>
-                <td>{{ post.author }}</td>
-                <td>{{ post.time_pub|date:'d M Y' }}</td>
+                <td><a href="{% url 'news:post_detail' post.id %}"><class="post-title">{{ post.title|censor }}</td>
+                <td><a href="{% url 'news:author_name' post.author_id %}">{{ post.author }}</td>
+                <td>{{ post.time_pub|date:'d M Y H:i' }}</td>
                 <td>{{ post.body|truncatechars:30|censor }}</td>
-                <td>{% for cat in post.cats.all %} {{ cat }} {% endfor %}</td>
+                <td>{% for cat in post.cats.all %}
+                    <a href="{% url 'news:post_tag' cat.id %}">
+                        {{ cat }}
+                    {% endfor %}</td>
                 <td>{{ post.rating }}</td>
         </tr>
 {% endfor %}

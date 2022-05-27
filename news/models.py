@@ -46,6 +46,13 @@ class Author(models.Model):
 
 class Category(models.Model):
     cat_name = models.CharField(max_length=64, unique=True)
+    subscribers = models.ManyToManyField(User, through='CategorySubscribers', blank=True)
+
+    def subscribe(self):
+        pass
+
+    def get_category(self):
+        return self.cat_name
 
     def __str__(self):
         return f'{self.cat_name}'
@@ -53,6 +60,23 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+
+
+class CategorySubscribers(models.Model):
+    subscriber_thru = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    category_thru = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
+
+    def get_user(self):
+        return self.subscriber_thru
+
+    def extract_category(self):
+        return self.category.cat_name
+
+    def get_category(self):
+        return self.category_thru
+
+    def __str__(self):
+        return f'{self.subscriber_thru} <-> {self.category_thru.cat_name}'
 
 
 class Post(models.Model):
@@ -71,6 +95,7 @@ class Post(models.Model):
     rating = models.SmallIntegerField(default=0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     cats = models.ManyToManyField(Category, through='PostCategory')
+    isUpdated = models.BooleanField(default=False)
 
     def __str__(self):
         post_metadata = f"'{self.title}' by {self.author.user.username},\n \
@@ -94,6 +119,14 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
+
+    def email_preview(self):
+        if len(self.body) > 51:
+            return f'{self.body[:51]}...'
+        return f'{self.body}'
+
+    def get_cat(self):
+        return f'{self.type}'
 
 
 class Comment(models.Model):

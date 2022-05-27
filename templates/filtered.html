@@ -1,0 +1,111 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block title %} Posts {% endblock title %}
+
+{% block content %}
+
+<h3 class="content-subhead">
+  Found
+  {{filter.qs|length}} posts on query:
+  <span>{{ name }}</span>
+</h3>
+
+{% if cat_name.id %}
+<div class="subscribe">
+  <strong>
+    Subscribe to
+    <em>{{ cat_name }}</em>?
+  </strong>
+  <a href="{% url 'sub_cat' cat_name.id %}">
+    <button class="pure-button button-success">
+      <i class="bi bi-bookmark-plus"></i>
+      Subscribe
+    </button>
+  </a>
+</div>
+{% endif %}
+
+
+
+{% for post in posts %}
+
+<!--  A single blog post -->
+<section class="post">
+  <header class="post-header"> <!--  <img class="post-avatar" src="/{{  post.author.avatar }}" alt="avatar" /> -->
+    <a href="{% url 'news:post_detail' post.id %}">
+      <h2 class="post-title">{{post.title|censor}}</h2>
+    </a>
+    <p class="post-meta">By
+      <a class="post-author" href="{% url 'news:author_name' post.author_id %}">
+        {{ post.author }}
+      </a>
+      on
+      <em>{{ post.time_pub|date:'d M Y H:i' }}
+      </em>
+<!--      Type:-->
+<!--      <a class="post-category post-type-{{post.type}}" href="{% url 'news:post_type' post.type %}">-->
+<!--        <span>-->
+<!--          {{post.get_type_display}}-->
+<!--        </span>-->
+<!--      </a>-->
+      Categories:
+      {% for cat in post.cats.values %}
+      <a href="{% url 'news:post_tag' cat.id %}">
+        {{ cat.cat_name }}
+      </a>
+      {%endfor%}
+    </p>
+  </header>
+  <div class="post-description">
+    <p>{{ post.body|censor | truncatewords:25 }}</p>
+    <p><em>Post rating: {{post.rating}} </em></p>
+  </div>
+</section>
+<hr />
+
+{%endfor%}
+
+
+   {# Добавляем пагинацию на страницу #}
+
+     <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                <a class="page-link" href="?{% url_replace page=1 %}" tabindex="-1">FIRST</a>
+            </li>
+            <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                <a class="page-link" href="{% if page_obj.has_previous %}?{% url_replace page=page_obj.previous_page_number %}{% endif %} " tabindex="-1">Previous</a>
+            </li>
+
+            {% if page_obj.number|add:'-4' > 1 %}
+                <li class="page-item disabled"><a class="page-link" href="?{% url_replace page=page_obj.number|add:'-5' %}">&hellip;</a></li>
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="active page-item disabled"><a class="page-link" href="?{% url_replace page=i %}">{{ i }}</a></li>
+                {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                    <li class="page-item"><a class="page-link" href="?{% url_replace page=i %}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+                <li class="page-item disabled"><a class="page-link" href="?{% url_replace page=page_obj.number|add:'5' %}">&hellip;</a></li>
+            {% endif %}
+
+            <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                <a class="page-link" href="{% if page_obj.has_next %} ?{% url_replace page=page_obj.next_page_number %} {% endif %}">Next</a>
+            </li>
+            <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                <a class="page-link" href="{% if page_obj.has_next %} ?{% url_replace page=page_obj.paginator.num_pages %}  {% endif %}">LAST</a>
+            </li>
+        </ul>
+    </nav>
+
+<hr>
+
+{% endblock content %}
