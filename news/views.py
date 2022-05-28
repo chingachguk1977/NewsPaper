@@ -11,14 +11,16 @@ from django.views.generic import (
     DeleteView,
     TemplateView)
 
-import NewsPaper.settings
+from django.conf import settings
 from .models import (
     Author,
     Post,
     PostCategory,
     Comment,
     Category,
-    CategorySubscribers)
+    CategorySubscribers,
+    AuthorSubscribers,
+)
 
 from django.core.mail import EmailMultiAlternatives  # импортируем класс для создания объекта письма с html
 from django.shortcuts import redirect
@@ -172,7 +174,7 @@ class PostAuthor(ListView):
     model = Post
     template_name = 'filtered.html'
     context_object_name = 'posts'
-    paginate_by = 5
+    paginate_by = 2
 
     def get_queryset(self):
         self.id = resolve(self.request.path_info).kwargs['pk']
@@ -181,10 +183,18 @@ class PostAuthor(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
+        user = self.request.user
         context = super().get_context_data(**kwargs)
         context['filter'] = PostFilter(
             self.request.GET, queryset=self.get_queryset())
+        context['subscription_object'] = 'author_subscription'
         context['name'] = Author.objects.get(user=User.objects.get(id=self.id))
+
+        is_subscribed = Author.objects.get(id=self.id).subscribers.filter(id=user.id).exists()
+        # is_subscribed = Category.objects.get(id=self.id).categorysubscribers_set.all()
+        # print(is_subscribed)
+        # print(user)
+        context['is_subscribed'] = is_subscribed
 
         return context
 
@@ -193,7 +203,7 @@ class PostType(ListView):
     model = Post
     template_name = 'filtered.html'
     context_object_name = 'posts'
-    paginate_by = 5
+    paginate_by = 2
 
     def get_queryset(self):
         # self.categoryType = self.get_categoryType_display
@@ -216,7 +226,7 @@ class PostTag(ListView):
     model = Post
     template_name = 'filtered.html'
     context_object_name = 'posts'
-    paginate_by = 5
+    paginate_by = 3
 
     def get_queryset(self):
         self.id = resolve(self.request.path_info).kwargs['pk']
@@ -224,31 +234,92 @@ class PostTag(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
+        user = self.request.user
         context = super().get_context_data(**kwargs)
         context['filter'] = PostFilter(
             self.request.GET, queryset=self.get_queryset())
+        context['subscription_object'] = 'category_subscription'
         context['name'] = Category.objects.get(id=self.id)
+
+        is_subscribed = Category.objects.get(id=self.id).subscribers.filter(id=user.id).exists()
+        # is_subscribed = Category.objects.get(id=self.id).categorysubscribers_set.all()
+        # print(is_subscribed)
+        # print(user)
+        context['is_subscribed'] = is_subscribed
 
         return context
 
 
+@login_required
+def subscribe_to_author(request, pk):
+    user = request.user
+    author = Author.objects.get(id=pk)
+    is_subscribed = author.subscribers.filter(id=user.id).exists()
+
+    if not is_subscribed:
+        author.subscribers.add(user)
+        html = render_to_string(  # передаем в шаблон переменные, тут передал категорию для вывода ее в письме
+            template_name='subscribed_author.html',
+            context={
+                'author': author.user.username,
+                'user': user,
+            },
+        )
+        author_repr = f'{author.user.username}'
+        email = user.email
+        msg = EmailMultiAlternatives(
+            subject=f'Subscription to author: {author_repr}',
+            from_email=settings.EMAIL_HOST_USER,
+            to=[email, ],
+        )
+
+        msg.attach_alternative(html, 'text/html')
+        try:
+            msg.send()
+        except Exception as e:
+            print(e)
+
+        return redirect('/posts/')
+
+    return redirect('/posts/')  # (request.META.get('HTTP_REFERER'))
+
+
+@login_required
+def unsubscribe_from_author(request, pk):
+    user = request.user
+    author = Author.objects.get(id=pk)
+    is_subscribed = author.subscribers.filter(id=user.id).exists()
+
+    if is_subscribed:
+        author.subscribers.remove(user)
+    return redirect('/posts/')
+
+
 # Подписка пользователя в категорию новостей
+# TODO продублировать модель автор-подписчик и повторить все функции для подписки на автора
+# сделать те же контекстные имена, что и для категории, подкорректировать кверисеты
+# чтобы использовался тот же шаблон filtered.html
+# Поставить флажок что подписан
 @login_required
 def subscribe_to_category(request, pk):
     user = request.user
     cat = Category.objects.get(id=pk)
+    is_subscribed = cat.subscribers.filter(id=user.id).exists()
 
-    if not cat.subscribers.filter(id=user.id).exists():
+    if not is_subscribed:
         cat.subscribers.add(user)
         html = render_to_string(  # передаем в шаблон переменные, тут передал категорию для вывода ее в письме
-            'subscribed.html',
-            {'categories': cat, 'user': user},
+            template_name='subscribed_category.html',
+            context={
+                'categories': cat,
+                'user': user,
+            },
         )
-        category = f'{cat}'
+        cat_repr = f'{cat}'
         email = user.email
         msg = EmailMultiAlternatives(
-            subject=f'Subscription to {category} category',
-            from_email=NewsPaper.settings.EMAIL_HOST_USER,
+            subject=f'Subscription to {cat_repr} category',
+            from_email=settings.EMAIL_HOST_USER,
             to=[email, ],
         )
 
@@ -267,7 +338,8 @@ def subscribe_to_category(request, pk):
 def unsubscribe_from_category(request, pk):
     user = request.user
     cat = Category.objects.get(id=pk)
+    is_subscribed = cat.subscribers.filter(id=user.id).exists()
 
-    if cat.subscribers.filter(id=user.id).exists():
+    if is_subscribed:
         cat.subscribers.remove(user)
     return redirect('/posts/')

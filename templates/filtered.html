@@ -8,66 +8,102 @@
 {% block content %}
 
 <h3 class="content-subhead">
-  Found
-  {{ filter.qs|length }} posts on query:
+  Found {{ filter.qs|length }} posts on query:
   <span>{{ name }}</span>
 </h3>
 
 {% if name.id %}
-<div class="subscribe">
-  <strong>
-    Subscribe to
-    <em>{{ name }}</em>?
-  </strong>
-  <a href="{% url 'news:sub_cat' name.id %}">
-    <button class="pure-button button-success">
-      <i class="bi bi-bookmark-plus"></i>
-      Subscribe
-    </button>
-  </a>
-</div>
+    {% if is_subscribed %}
+        <div class="subscribe">
+          <strong>
+            You are already subscribed to <em>{{ name }}</em>. Unsubscribe?
+            {% if subscription_object == 'category_subscription' %}
+                  </strong>
+                  <a href="{% url 'news:unsub_cat' name.id %}">
+                    <button class="pure-button button-success" style="border-radius: 15px">
+                      <i class="bi bi-bookmark-plus"></i>
+                      Unsubscribe
+                    </button>
+                  </a>
+            {% endif %}
+            {% if subscription_object == 'author_subscription' %}
+                    </strong>
+                    <a href="{% url 'news:unsub_author' name.id %}">
+                    <button class="pure-button button-success" style="border-radius: 15px">
+                      <i class="bi bi-bookmark-plus"></i>
+                      Unsubscribe
+                    </button>
+                  </a>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="subscribe">
+          <strong>
+            Do you want to subscribe to <em>{{ name }}</em>?
+            {% if subscription_object == 'category_subscription' %}
+                  </strong>
+                  <a href="{% url 'news:sub_cat' name.id %}">
+                    <button class="pure-button button-success" style="border-radius: 15px">
+                      <i class="bi bi-bookmark-plus"></i>
+                      Subscribe
+                    </button>
+                  </a>
+            {% endif %}
+            {% if subscription_object == 'author_subscription' %}
+                    </strong>
+                    <a href="{% url 'news:sub_author' name.id %}">
+                    <button class="pure-button button-success" style="border-radius: 15px">
+                      <i class="bi bi-bookmark-plus"></i>
+                      Subscribe
+                    </button>
+                  </a>
+            {% endif %}
+        </div>
+    {% endif %}
 {% endif %}
 
 
+{% if posts %}
+    {% for post in posts %}
 
-{% for post in posts %}
+    <!--  A single blog post -->
+    <section class="post">
+      <header class="post-header"> <!--  <img class="post-avatar" src="/{{  post.author.avatar }}" alt="avatar" /> -->
+        <a href="{% url 'news:post_detail' post.id %}">
+          <h2 class="post-title">{{post.title|censor}}</h2>
+        </a>
+        <p class="post-meta">By
+          <a class="post-author" href="{% url 'news:author_name' post.author_id %}">
+            {{ post.author }}
+          </a>
+          on
+          <em>{{ post.time_pub|date:'d M Y H:i' }}
+          </em>
+    <!--      Type:-->
+    <!--      <a class="post-category post-type-{{post.type}}" href="{% url 'news:post_type' post.type %}">-->
+    <!--        <span>-->
+    <!--          {{post.get_type_display}}-->
+    <!--        </span>-->
+    <!--      </a>-->
+          Categories:
+          {% for cat in post.cats.values %}
+              <a href="{% url 'news:post_tag' cat.id %}">
+                {{ cat.cat_name }}</a> :
+                <a></a>
+          {%endfor%}
+        </p>
+      </header>
+      <div class="post-description">
+        <p>{{ post.body|censor | truncatewords:25 }}</p>
+        <p><em>Post rating: {{post.rating}} </em></p>
+      </div>
+    </section>
+    <hr />
 
-<!--  A single blog post -->
-<section class="post">
-  <header class="post-header"> <!--  <img class="post-avatar" src="/{{  post.author.avatar }}" alt="avatar" /> -->
-    <a href="{% url 'news:post_detail' post.id %}">
-      <h2 class="post-title">{{post.title|censor}}</h2>
-    </a>
-    <p class="post-meta">By
-      <a class="post-author" href="{% url 'news:author_name' post.author_id %}">
-        {{ post.author }}
-      </a>
-      on
-      <em>{{ post.time_pub|date:'d M Y H:i' }}
-      </em>
-<!--      Type:-->
-<!--      <a class="post-category post-type-{{post.type}}" href="{% url 'news:post_type' post.type %}">-->
-<!--        <span>-->
-<!--          {{post.get_type_display}}-->
-<!--        </span>-->
-<!--      </a>-->
-      Categories:
-      {% for cat in post.cats.values %}
-      <a href="{% url 'news:post_tag' cat.id %}">
-        {{ cat.cat_name }}
-      </a>
-      {%endfor%}
-    </p>
-  </header>
-  <div class="post-description">
-    <p>{{ post.body|censor | truncatewords:25 }}</p>
-    <p><em>Post rating: {{post.rating}} </em></p>
-  </div>
-</section>
-<hr />
-
-{%endfor%}
-
+    {%endfor%}
+{% else %}
+    <h2>There are no posts!</h2>
+{% endif %}
 
    {# Добавляем пагинацию на страницу #}
 

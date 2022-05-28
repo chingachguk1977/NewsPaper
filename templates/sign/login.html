@@ -1,8 +1,8 @@
-{% extends "main.html" %}
+{% extends '../flatpages/default.html' %}
 
 {% block content %}
 <h2> Войти в портал </h2>
-<form method="post" action="{% url 'login' %}">
+<form method="post" action="{% url 'sign:login' %}">
 {% csrf_token %}
 <table>
 <tr>
@@ -14,8 +14,10 @@
     <td>{{ form.password }}</td>
 </tr>
 </table>
-
 <input type="submit" value="Войти">
 </form>
+
+    <br>
+
 <button> <a href="/sign/signup"> Регистрация </a></button>
 {% endblock %}

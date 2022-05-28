@@ -27,5 +27,6 @@ urlpatterns = [
     # path('profiles/', include('news.urls')),
     # path('', include('django.contrib.auth.urls')),
     # path('login/', auth_views.LoginView.as_view()),
+    # path('appointments/', include(('appointment.urls', 'appointments'), namespace='appointments')),
 
 ]

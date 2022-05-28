@@ -31,10 +31,22 @@
                            </a>
                        </li>
                        <li class="nav-item">
+                           <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a>
+                       </li>
+                       <li class="nav-item">
                            <a class="nav-link" href="{% url 'sign:profile_update' %}">Profile</a>
                        </li>
                        <li class="nav-item">
                            <a class="nav-link" href="{% url 'news:post_list' %}">Posts</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="{% url 'news:post_search' %}">Search</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="{% url 'sign:login' %}">Login</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="{% url 'sign:logout' %}">Logout</a>
                        </li>
                    </ul>
                </div>

@@ -9,6 +9,13 @@ from django.urls import reverse
 class Author(models.Model):
     rating = models.SmallIntegerField(default=0)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    subscribers = models.ManyToManyField(
+        User,
+        through='AuthorSubscribers',
+        blank=True,
+        related_name='%(app_label)s_%(class)s_related',
+        related_query_name='%(app_label)s_%(class)ss'
+    )
 
     def update_rating(self):
         posts_rating = self.post_set.aggregate(post_rating_aggr=Sum('rating'))
@@ -30,6 +37,9 @@ class Author(models.Model):
 
         self.save()
         return self.rating
+
+    def subscribe(self):
+        pass
 
     # Возвращает автора с лучшим рейтингом
     @staticmethod
@@ -57,6 +67,11 @@ class Category(models.Model):
     def __str__(self):
         return f'{self.cat_name}'
 
+    def is_subscribed(self):
+        self.subscribers.user.id
+        cat = Category.objects.get(id=pk)
+        return cat.subscribers.filter(id=user.id).exists()
+
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
@@ -70,13 +85,30 @@ class CategorySubscribers(models.Model):
         return self.subscriber_thru
 
     def extract_category(self):
-        return self.category.cat_name
+        return self.category_thru.cat_name
 
     def get_category(self):
         return self.category_thru
 
     def __str__(self):
         return f'{self.subscriber_thru} <-> {self.category_thru.cat_name}'
+
+
+class AuthorSubscribers(models.Model):
+    subscriber_thru = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    author_thru = models.ForeignKey(Author, on_delete=models.CASCADE, blank=True, null=True)
+
+    def get_user(self):
+        return self.subscriber_thru
+
+    def extract_category(self):
+        return self.author_thru.user.username
+
+    def get_category(self):
+        return self.author_thru
+
+    def __str__(self):
+        return f'{self.subscriber_thru} <-> {self.author_thru.user.username}'
 
 
 class Post(models.Model):
@@ -98,11 +130,13 @@ class Post(models.Model):
     isUpdated = models.BooleanField(default=False)
 
     def __str__(self):
+        num_of_comments = len(self.comment_set.all())
         post_metadata = f"'{self.title}' by {self.author.user.username},\n \
                           published on: {self.time_pub.strftime('%d/%m/%Y, %H:%M')},\n \
                           the rating of this post is {self.rating}\nPreview: {self.preview()}.\n \
-                          It has {len(self.comment_set)} comments."
+                          It has {num_of_comments} comments."
         return post_metadata
+        # return f'ID: {self.id}, Title: {self.title}'
 
     def like(self):
         self.rating += 1
@@ -156,4 +190,4 @@ class PostCategory(models.Model):
     cat_thru = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.post_thru} <-> {self.cat_thru}'
+        return f'{self.cat_thru} <-> {self.post_thru}'

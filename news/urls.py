@@ -13,7 +13,7 @@ from .views import (
    subscribe_to_category,
    unsubscribe_from_category,
    PostType,
-   PostTag
+   PostTag, subscribe_to_author, unsubscribe_from_author
 )
 
 app_name = 'news'
@@ -35,8 +35,10 @@ urlpatterns = [
    path('<int:pk>/delete/', PostDelete.as_view(), name='post_delete'),
    path('search/', PostSearchView.as_view(), name='post_search'),
    path('author/<int:pk>', PostAuthor.as_view(), name='author_name'),
-   path('subscribe/<int:pk>', subscribe_to_category, name='sub_cat'),
-   path('unsubscribe/<int:pk>', unsubscribe_from_category, name='unsub_cat'),
+   path('subscribe/category/<int:pk>', subscribe_to_category, name='sub_cat'),
+   path('unsubscribe/category/<int:pk>', unsubscribe_from_category, name='unsub_cat'),
+   path('subscribe/author/<int:pk>', subscribe_to_author, name='sub_author'),
+   path('unsubscribe/author/<int:pk>', unsubscribe_from_author, name='unsub_author'),
    path('tag/<int:pk>', PostTag.as_view(), name='post_tag'),
    path('type/<str:title>', PostType.as_view(), name='post_type'),
    # path('profile_update/', ProfileUpdate.as_view(), name='profile_update'),
