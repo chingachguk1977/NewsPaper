@@ -9,13 +9,14 @@ from datetime import timedelta, date
 # from django.utils.timezone import datetime, timedelta, timezone, timestamp
 
 
-def get_subscribers(category):
+def collect_subscribers(category):
     """
     iterate thro all subscribers in Category table, extract their email and form up a list of email recepients
     """
     email_recipients = []
     for user in category.subscribers.all():
         email_recipients.append(user.email)
+    print(f'collect_subscribers func: {email_recipients}')
     return email_recipients
 
 
@@ -26,7 +27,6 @@ def send_emails(post_object, *args, **kwargs):
         {'category_object': kwargs['category_object'], 'post_object': post_object},
         # передаем в шаблон любые переменные
     )
-    # print(f'category: {category}')
     print(kwargs)
     msg = EmailMultiAlternatives(
         subject=kwargs['email_subject'],
@@ -37,23 +37,30 @@ def send_emails(post_object, *args, **kwargs):
     msg.send(fail_silently=False)
 
 
-def new_post_subscription(instance):
-    # latest_post = Post.objects.all().order_by('-dateCreated')[0]
+def new_post_subscription(latest_pst):
     template = 'newpost.html'
-    latest_post = instance
+    # print(latest_post)
+    # print(f'latest_post.isUpdated = {latest_post.isUpdated}')
 
-    if not latest_post.isUpdated:
-        for category in latest_post.cats.all():
-            email_subject = f"New Post in Category: '{category}'"
-            email_recipients = get_subscribers(category)
-            send_emails(
-                latest_post,
-                category_object=category,
-                email_subject=email_subject,
-                template=template,
-                email_recipients=email_recipients)
+    # if not latest_pst.isUpdated:
+    print(latest_pst.title)
+    categories = latest_pst.cats.all()
+    print(f'categories = {categories}')
+    for category in categories:
+        print('do we get into for?')
+        email_subject = f"New Post in Category: '{category}'"
+        print(f'categories = {category}')
+        email_recipients = collect_subscribers(category)
+        print(f'new_post_subscription func collected subscribers: {email_recipients}')
+        send_emails(
+            latest_pst,
+            category_object=category,
+            email_subject=email_subject,
+            template=template,
+            email_recipients=email_recipients)
 
 
+# TODO реализовать такую же хрень с подписчиками на авторов
 def notify_subscribers_weekly():
     week = timedelta(days=7)
     posts = Post.objects.all()
@@ -65,28 +72,24 @@ def notify_subscribers_weekly():
         time_delta = date.today() - post.time_pub.date()
         if time_delta < week:
             past_week_posts.append(post)
-    # past_week_posts = posts.filter(dateCreated__range=[str(today), str(week)])
 
     past_week_categories = set()
     for post in past_week_posts:
-        # past_week_categories.add(post.postCategory.all())
 
         for category in post.cats.all():
             past_week_categories.add(category)
-            # print(post.postCategory.all().filter(catsub=category))
 
-    # print(past_week_categories)
+    print(f'past_week_categories = {past_week_categories}')
 
-    email_recipients = set()
+    email_recipients_set = set()
     for category in past_week_categories:
-        # # print(category.subscribers.all())
+        print(f'category.subscribers.all = {category.subscribers.all()}')
         # email_subject = f'New post in category: "{category}"'
-        get_user_emails = set(get_subscribers(category))
-        email_recipients.update(get_user_emails)
-        # print(get_user_emails)
-
-    # print(post.postCategory.all().filter(postCategory=category))
-    # print(user_emails)
+        get_user_emails = set(collect_subscribers(category))
+        email_recipients_set.update(get_user_emails)
+        print(f'get_user_emails = {get_user_emails}')
+    email_recipients = list(email_recipients_set)
+    print(email_recipients)
 
     for email in email_recipients:
         post_object = []
@@ -96,19 +99,19 @@ def notify_subscribers_weekly():
             subscription = post.cats.all().values('subscribers').filter(subscribers__email=email)
 
             if subscription.exists():
-                # print(subscription)
+                print(f'subscription = {subscription}')
                 post_object.append(post)
                 categories.update(post.cats.filter(subscribers__email=email))
-        print(email)
-        # print(post_object)
+        print(f'email = {email}')
+        print(f'post_object = {post_object}')
         category_object = list(categories)
-        print(category_object)
-        # print(set(post.postCategory.all()))
+        print(f'category_object = {category_object}')
+        print(f'set(post.cats.all()) = {set(post.cats.all())}')
 
         send_emails(
             post_object,
             category_object=category_object,
             email_subject=email_subject,
             template=template,
-            user_emails=[email, ]
+            email_recipients=[email, ]
         )

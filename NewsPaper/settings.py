@@ -12,18 +12,22 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
+from dotenv import load_dotenv
+
+# from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+dotenv_path = os.path.join(BASE_DIR, '.env')
+load_dotenv(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,16 +50,23 @@ INSTALLED_APPS = [
 
     'sign',
     'protect',
-
+    'django_apscheduler',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     # ... include the providers you want to enable:
     'allauth.socialaccount.providers.google',
-    'news',
+    'news.apps.NewsConfig',
 ]
 
 SITE_ID = 1
+
+# формат даты, которую будет воспринимать наш задачник (вспоминаем модуль по фильтрам)
+APSCHEDULER_DATETIME_FORMAT = 'N j, Y, f:s a'
+
+# если задача не выполняется за 25 секунд, то она автоматически снимается,
+# можете поставить время побольше, но как правило, это сильно бьёт по производительности сервера
+APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -102,6 +113,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'OPTIONS': {'timeout': 5, }
     }
 }
 
@@ -130,17 +142,22 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'  # was 'none'
 ACCOUNT_FORMS = {'signup': 'sign.forms.BasicSignupForm'}
+# позволит избежать дополнительных действий и активирует аккаунт сразу,
+# как только мы перейдем по ссылке
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+# количество дней, в течение которых будет доступна ссылка на подтверждение регистрации
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
 
-EMAIL_HOST = config('EMAIL_HOST')  # адрес сервера Яндекс-почты для всех один и тот же
+EMAIL_HOST = os.getenv('EMAIL_HOST')  # адрес сервера Яндекс-почты для всех один и тот же
 EMAIL_PORT = 465  # порт smtp сервера тоже одинаковый
 # ваше имя пользователя, например, если ваша почта user@yandex.ru, то сюда надо писать user,
 # иными словами, это всё то что идёт до собаки
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # пароль от почты
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # пароль от почты
 EMAIL_SUBJECT_PREFIX = '[Django Tutorial] --> '
 # Яндекс и Mail.Ru используют ssl, подробнее о том, что это, почитайте в дополнительных источниках,
 # но включать его здесь обязательно

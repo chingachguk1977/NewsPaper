@@ -13,10 +13,10 @@ class PostForm(forms.ModelForm):
         # fields = '__all__'
 
         fields = [
-            'type',
+            # 'type',
             'title',
             'body',
-            'author',
+            # 'author',
             'cats',
         ]
 

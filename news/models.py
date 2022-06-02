@@ -14,7 +14,7 @@ class Author(models.Model):
         through='AuthorSubscribers',
         blank=True,
         related_name='%(app_label)s_%(class)s_related',
-        related_query_name='%(app_label)s_%(class)ss'
+        related_query_name='%(app_label)s_%(class)ss',
     )
 
     def update_rating(self):
@@ -50,8 +50,7 @@ class Author(models.Model):
         return f'{self.user.username}, rating = {self.rating}'
 
     class Meta:
-        verbose_name = 'Author'
-        verbose_name_plural = verbose_name + 's'
+        pass
 
 
 class Category(models.Model):
@@ -190,4 +189,4 @@ class PostCategory(models.Model):
     cat_thru = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.cat_thru} <-> {self.post_thru}'
+        return f'{self.cat_thru} <-> {self.post_thru.title}'

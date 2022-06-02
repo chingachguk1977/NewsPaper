@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User
@@ -41,7 +42,7 @@ class PostsList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     permission_required = (
         'news.view_post',
     )
-    ordering = 'time_pub'
+    ordering = '-time_pub'
     template_name = 'posts.html'
     context_object_name = 'posts'
     paginate_by = 5
@@ -94,7 +95,8 @@ class CategoryDetail(DetailView):
 
 
 # Добавляем новое представление для создания постов.
-class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+# TODO добавить проверку, что чел, который пытается создать пост, входит в группу авторов
+class PostCreate(PermissionRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
     permission_required = (
@@ -102,11 +104,35 @@ class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     )
     template_name = 'post_edit.html'
     success_url = '/posts/'
+    error_message = 'No more than 3 posts a day, dude!'
 
-    # def form_valid(self, form):
-    #     post = form.save(commit=False)
-    #     post.type = 'AR'
-    #     return super().form_valid(form)
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = Author.objects.get(user=self.request.user)
+        postauthor = self.object.author
+        posts = Post.objects.all()
+        daily_post_limit = 30
+
+        today_posts_count = 0
+        for post in posts:
+            if post.author == postauthor:
+                time_delta = datetime.now().date() - post.time_pub.date()
+                if time_delta.total_seconds() < (60*60*24):
+                    today_posts_count += 1
+
+        if today_posts_count < daily_post_limit:
+            self.object.save()
+
+            cat = Category.objects.get(pk=self.request.POST['cats'])
+            self.object.cats.add(cat)
+
+            validated = super().form_valid(form)
+
+        else:
+            messages.error(self.request, self.error_message)
+            validated = super().form_invalid(form)
+
+        return validated
 
 
 class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
@@ -130,7 +156,6 @@ class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
 #         return self.request.user
 
 
-# Представление удаляющее товар.
 class PostDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Post
     permission_required = (
@@ -188,7 +213,7 @@ class PostAuthor(ListView):
         context['filter'] = PostFilter(
             self.request.GET, queryset=self.get_queryset())
         context['subscription_object'] = 'author_subscription'
-        context['name'] = Author.objects.get(user=User.objects.get(id=self.id))
+        context['name'] = Author.objects.get(user=user)  # User.objects.get(id=self.id))
 
         is_subscribed = Author.objects.get(id=self.id).subscribers.filter(id=user.id).exists()
         # is_subscribed = Category.objects.get(id=self.id).categorysubscribers_set.all()
@@ -296,10 +321,6 @@ def unsubscribe_from_author(request, pk):
 
 
 # Подписка пользователя в категорию новостей
-# TODO продублировать модель автор-подписчик и повторить все функции для подписки на автора
-# сделать те же контекстные имена, что и для категории, подкорректировать кверисеты
-# чтобы использовался тот же шаблон filtered.html
-# Поставить флажок что подписан
 @login_required
 def subscribe_to_category(request, pk):
     user = request.user
