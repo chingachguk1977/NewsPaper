@@ -4,9 +4,17 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from .models import Post
 from datetime import timedelta, date
+from time import time
+
+from celery import shared_task
 
 
 # from django.utils.timezone import datetime, timedelta, timezone, timestamp
+
+@shared_task
+def hello():
+    time.sleep(10)
+    print('Hello World!')
 
 
 def collect_subscribers(category):
