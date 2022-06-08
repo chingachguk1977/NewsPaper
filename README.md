@@ -1,5 +1,6 @@
-## News_Portal
-# SF Django News Portal Tutorial
+# News_Portal
+
+## SF Django News Portal Tutorial
 
 As of D7 final task:
 
