@@ -34,6 +34,8 @@ from django.urls import reverse_lazy
 from .filters import PostFilter
 from .forms import PostForm
 
+from .tasks import new_post_subscription
+
 
 # Create your views here.
 
@@ -104,14 +106,15 @@ class PostCreate(PermissionRequiredMixin, CreateView):
     )
     template_name = 'post_edit.html'
     success_url = '/posts/'
-    error_message = 'No more than 3 posts a day, dude!'
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.author = Author.objects.get(user=self.request.user)
         postauthor = self.object.author
+        DAILY_POST_LIMIT = 30
+        error_message = f'No more than {DAILY_POST_LIMIT} posts a day, dude!'
         posts = Post.objects.all()
-        daily_post_limit = 30
+        
 
         today_posts_count = 0
         for post in posts:
@@ -120,11 +123,15 @@ class PostCreate(PermissionRequiredMixin, CreateView):
                 if time_delta.total_seconds() < (60*60*24):
                     today_posts_count += 1
 
-        if today_posts_count < daily_post_limit:
+        if today_posts_count < DAILY_POST_LIMIT:
             self.object.save()
+            id_new_post = self.object.id
+            # print(id_new_post)
+            print('notifying subscribers from view (no signals)...', id_new_post)
+            new_post_subscription.apply_async([id_new_post], countdown = 5)
 
-            cat = Category.objects.get(pk=self.request.POST['cats'])
-            self.object.cats.add(cat)
+            # cat = Category.objects.get(pk=self.request.POST['cats'])
+            # self.object.cats.add(cat)
 
             validated = super().form_valid(form)
 

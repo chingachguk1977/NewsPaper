@@ -4,17 +4,11 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from .models import Post
 from datetime import timedelta, date
-from time import time
+from time import sleep
 
 from celery import shared_task
 
-
 # from django.utils.timezone import datetime, timedelta, timezone, timestamp
-
-@shared_task
-def hello():
-    time.sleep(10)
-    print('Hello World!')
 
 
 def collect_subscribers(category):
@@ -45,19 +39,22 @@ def send_emails(post_object, *args, **kwargs):
     msg.send(fail_silently=False)
 
 
-def new_post_subscription(latest_pst):
+@shared_task
+def new_post_subscription(oid):
     template = 'newpost.html'
+    latest_pst = Post.objects.get(pk=oid)
     # print(latest_post)
     # print(f'latest_post.isUpdated = {latest_post.isUpdated}')
 
     # if not latest_pst.isUpdated:
+    # sleep(5)
     print(latest_pst.title)
     categories = latest_pst.cats.all()
     print(f'categories = {categories}')
     for category in categories:
-        print('do we get into for?')
+        # print('do we get into for?')
         email_subject = f"New Post in Category: '{category}'"
-        print(f'categories = {category}')
+        print(f'category = {category}')
         email_recipients = collect_subscribers(category)
         print(f'new_post_subscription func collected subscribers: {email_recipients}')
         send_emails(
@@ -69,6 +66,7 @@ def new_post_subscription(latest_pst):
 
 
 # TODO реализовать такую же хрень с подписчиками на авторов
+@shared_task
 def notify_subscribers_weekly():
     week = timedelta(days=7)
     posts = Post.objects.all()
