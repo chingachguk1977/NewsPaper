@@ -14,6 +14,6 @@ app.conf.beat_schedule = {
     'action_every_monday_8am': {
         'task': 'news.tasks.notify_subscribers_weekly',
         # 'schedule': crontab(), # Uncomment to test this feature (every minute)
-        'schedule': crontab(hour=8, minute=00, day_of_week='thursday'),
+        'schedule': crontab(hour=8, minute=00, day_of_week='monday'),
     },
 }
