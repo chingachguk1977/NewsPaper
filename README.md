@@ -40,6 +40,8 @@ As of D7 final task:
 
 ***Реализовано.***
 
+<center> <img src = D:\YandexDisk\Скриншоты\2022-06-09_11-00-54 alt="drawing" style="width:500px;">
+
 ***При необходимости заменить настройки в файле*** *celery.py*
 
 
