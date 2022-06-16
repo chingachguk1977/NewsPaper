@@ -4,6 +4,7 @@ from datetime import datetime, date, time
 from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.urls import reverse
+from django.core.cache import cache
 
 
 class Author(models.Model):
@@ -151,6 +152,7 @@ class Post(models.Model):
         return f'{self.body}'
 
     def get_absolute_url(self):
+        # return f'/posts/{self.id}'
         return reverse('post_detail', args=[str(self.id)])
 
     def email_preview(self):
@@ -160,6 +162,11 @@ class Post(models.Model):
 
     def get_cat(self):
         return f'{self.type}'
+    
+    def save(self, *args, **kwargs):
+        self.isUpdated = False
+        super().save(*args, **kwargs) # сначала вызываем метод родителя, чтобы объект сохранился
+        cache.delete(f'post-{self.pk}') # затем удаляем его из кэша, чтобы сбросить его    
 
 
 class Comment(models.Model):

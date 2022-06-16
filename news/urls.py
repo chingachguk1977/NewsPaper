@@ -16,6 +16,12 @@ from .views import (
    PostTag, subscribe_to_author, unsubscribe_from_author
 )
 
+# нужно добавлять кэширование напрямую в urls.py (в котором хранятся именно сами представления, 
+# а не основной urls.py из папки с settings.py
+from django.core.cache import cache
+from django.views.decorators.cache import cache_page
+
+
 app_name = 'news'
 urlpatterns = [
    # path — означает путь.
@@ -24,13 +30,18 @@ urlpatterns = [
    # Т.к. наше объявленное представление является классом,
    # а Django ожидает функцию, нам надо представить этот класс в виде view.
    # Для этого вызываем метод as_view.
+   
+   # с кешем (раскомментить для кеширования высокоуровневое)
+   # path('', cache_page(60*1)(PostsList.as_view()), name='post_list'),
+   # path('<int:pk>', cache_page(60*5)(PostDetail.as_view()), name='post_detail'),
+   # path('author/<int:pk>', cache_page(60*5)(PostAuthor.as_view()), name='author_name'),
+   # path('tag/<int:pk>', cache_page(60*5)(PostTag.as_view()), name='post_tag'),
+   # path('type/<str:title>', cache_page(60*5)(PostType.as_view()), name='post_type'),
+      
+   # без кеша (кешируем на низком уровне)
    path('', PostsList.as_view(), name='post_list'),
    path('<int:pk>', PostDetail.as_view(), name='post_detail'),
-   # path('post/<int:pk>', PostDetail.as_view(), name='post_detail'),
-   # path('create/', create_post, name='post_create'),
    path('create/', PostCreate.as_view(), name='post_create'),
-   # path('add/', PostCreate.as_view(), name='post_create'),
-   # path('<int:pk>/edit/', PostUpdate.as_view(), name='post_update'),
    path('<int:pk>/update/', PostUpdate.as_view(), name='post_update'),
    path('<int:pk>/delete/', PostDelete.as_view(), name='post_delete'),
    path('search/', PostSearchView.as_view(), name='post_search'),
@@ -43,4 +54,8 @@ urlpatterns = [
    path('type/<str:title>', PostType.as_view(), name='post_type'),
    # path('profile_update/', ProfileUpdate.as_view(), name='profile_update'),
    # path('accounts/profile/', ProfileUpdate.as_view(), name='profile_update'),
+   # path('post/<int:pk>', PostDetail.as_view(), name='post_detail'),
+   # path('create/', create_post, name='post_create'),
+   # path('add/', PostCreate.as_view(), name='post_create'),
+   # path('<int:pk>/edit/', PostUpdate.as_view(), name='post_update'),
 ]

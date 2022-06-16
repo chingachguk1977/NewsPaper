@@ -8,56 +8,64 @@
         <title>Bare - Start Bootstrap Template</title>
 
         {% load static %}
+        {% load cache %}
+
         <!-- Favicon-->
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
     </head>
+
     <body>
-        <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-           <div class="container">
-               <a class="navbar-brand" href="#">News Portal</a>
-               <button class="navbar-toggler" type="button" data-toggle="collapse"
-                       data-target="#navbarResponsive"
-                       aria-controls="navbarResponsive" aria-expanded="false"
-                       aria-label="Toggle navigation">
-                   <span class="navbar-toggler-icon"></span>
-               </button>
-               <div class="collapse navbar-collapse" id="navbarResponsive">
-                   <ul class="navbar-nav ml-auto">
-                       <li class="nav-item active">
-                           <a class="nav-link" href="#">Home
-                               <span class="sr-only">(current)</span>
-                           </a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="{% url 'sign:profile_update' %}">Profile</a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="{% url 'news:post_list' %}">Posts</a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="{% url 'news:post_create' %}">Create Post</a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="{% url 'news:post_search' %}">Search</a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="{% url 'sign:login' %}">Login</a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="{% url 'sign:logout' %}">Logout</a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="{% url 'sign:signup' %}">Sign Up</a>
-                       </li>
-                   </ul>
-               </div>
-           </div>
-        </nav>
+        {% cache 300 header %}
+            {% block header %}
+                <!-- Responsive navbar-->
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+                <div class="container">
+                    <a class="navbar-brand" href="#">News Portal</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarResponsive"
+                            aria-controls="navbarResponsive" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'sign:profile_update' %}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'news:post_list' %}">Posts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'news:post_create' %}">Create Post</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'news:post_search' %}">Search</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'sign:login' %}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'sign:logout' %}">Logout</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'sign:signup' %}">Sign Up</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                </nav>
+            {% endblock header %}
+        {% endcache %}
+
         <!-- Page content-->
         <div class="container">
            <div class="row">
@@ -66,6 +74,20 @@
                         {{ flatpage.content }}
                    {% endblock content %}
                </div>
+               <!-- Кэшируем отдельный блок на 300 секунд -->
+               {% cache 300 footer %}
+                {% block footer %}
+                    <div class="footer">
+                        <div class="pure-menu pure-menu-horizontal">
+                        <ul>
+                            <li class="pure-menu-item"><a class="pure-menu-link" href="http://vk.com/chingachguk1977/">VK</a></li>
+                            <li class="pure-menu-item"><a class="pure-menu-link" href="http://github.com/chingachguk1977">GitHub</a></li>
+                            <li class="pure-menu-item"><a class="pure-menu-link" href="https://www.youtube.com/channel/UCINiu-8vmi2JdEH9O4OafoQ">YouTube</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                {% endblock footer %}
+               {% endcache %}
            </div>
         </div>
     </body>

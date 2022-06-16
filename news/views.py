@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.core.cache import cache
 from django.views.generic import (
     ListView,
     DetailView,
@@ -64,7 +65,7 @@ class PostsList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category_name'] = Category.objects.all()
-        context['time_now'] = datetime.utcnow()
+        context['time_now'] = datetime.now()
         context['filterset'] = self.filterset
         context['qs_len'] = len(Post.objects.all())
         return context
@@ -77,6 +78,18 @@ class PostDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
         'news.view_post',
     )
     context_object_name = 'post'
+    
+    def get_object(self, *args, **kwargs): # переопределяем метод получения объекта
+        # кэш очень похож на словарь, и метод get действует также. 
+        # Он забирает значение по ключу, если его нет, то забирает None.
+        obj = cache.get(f'post-{self.kwargs["pk"]}', None)
+ 
+        # если объекта нет в кэше, то получаем его и записываем в кэш
+        if not obj:
+            obj = super().get_object(queryset=self.queryset) 
+            cache.set(f'post-{self.kwargs["pk"]}', obj)
+        
+        return obj
 
 
 class CategoryDetail(DetailView):
@@ -150,6 +163,14 @@ class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     )
     template_name = 'post_edit.html'
     success_url = '/posts/'
+    
+    # метод get_object используем вместо queryset, чтобы получить информацию об объекте, 
+    # который собираемся редактировать
+    def get_object(self, **kwargs):
+        id = self.kwargs.get('pk')
+        post = Post.objects.get(pk=id)
+        post.isUpdated = True
+        return post
 
 
 # class ProfileUpdate(LoginRequiredMixin, UpdateView):
