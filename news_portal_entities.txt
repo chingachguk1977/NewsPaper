@@ -6,6 +6,7 @@ CREATE TABLE AUTHOR (
     PRIMARY KEY (author_id)
 );
 
+
 CREATE TABLE CATEGORY (
     cat_id INT AUTO_INCREMENT NOT NULL,
     cat_name CHAR(40) NOT NULL, #Имеет единственное поле: название категории.
