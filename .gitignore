@@ -3,4 +3,4 @@ sendgrid.env
 **/__pycache__
 **/cache_files
 *.pyc
-db.sqlite3
+*.sqlite3
