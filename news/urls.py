@@ -31,7 +31,7 @@ urlpatterns = [
    # а Django ожидает функцию, нам надо представить этот класс в виде view.
    # Для этого вызываем метод as_view.
    
-   # с кешем (раскомментить для кеширования высокоуровневое)
+   # с кешем (раскомментить для кеширования высокоуровневого)
    # path('', cache_page(60*1)(PostsList.as_view()), name='post_list'),
    # path('<int:pk>', cache_page(60*5)(PostDetail.as_view()), name='post_detail'),
    # path('author/<int:pk>', cache_page(60*5)(PostAuthor.as_view()), name='author_name'),
@@ -52,6 +52,8 @@ urlpatterns = [
    path('unsubscribe/author/<int:pk>', unsubscribe_from_author, name='unsub_author'),
    path('tag/<int:pk>', PostTag.as_view(), name='post_tag'),
    path('type/<str:title>', PostType.as_view(), name='post_type'),
+   
+   # ненужные урлы
    # path('profile_update/', ProfileUpdate.as_view(), name='profile_update'),
    # path('accounts/profile/', ProfileUpdate.as_view(), name='profile_update'),
    # path('post/<int:pk>', PostDetail.as_view(), name='post_detail'),
