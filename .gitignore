@@ -4,3 +4,5 @@ sendgrid.env
 **/cache_files
 **/*.pyc
 #*.sqlite3
+mydata.json
+mydata.xml
