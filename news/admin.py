@@ -23,8 +23,18 @@ class PostAdmin(admin.ModelAdmin):
     actions = [nullify_rating]
 
 
+class AuthorAdmin(admin.ModelAdmin):
+    # list_display — это список или кортеж со всеми полями, которые вы хотите видеть в таблице
+    # генерируем список имён всех полей для более красивого отображения
+    # list_display = [field.name for field in Post._meta.get_fields()]
+    list_display = ('user', 'rating',)
+    list_filter = ('rating',)
+    # search_fields = ('title', 'cats__cat_name')
+    actions = [nullify_rating]
+
+
 # Register your models here.
-admin.site.register(Author)
+admin.site.register(Author, AuthorAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(PostCategory)
 admin.site.register(Comment)
