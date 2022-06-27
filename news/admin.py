@@ -17,7 +17,7 @@ class PostAdmin(admin.ModelAdmin):
     # list_display — это список или кортеж со всеми полями, которые вы хотите видеть в таблице
     # генерируем список имён всех полей для более красивого отображения
     # list_display = [field.name for field in Post._meta.get_fields()]
-    list_display = ('title', 'author', 'time_pub', 'body', 'rating',)
+    list_display = ('title', 'author', 'time_pub', 'body', 'get_cat', 'rating',)
     list_filter = ('rating', 'time_pub',)
     search_fields = ('title', 'cats__cat_name')
     actions = [nullify_rating]
@@ -29,7 +29,7 @@ class AuthorAdmin(admin.ModelAdmin):
     # list_display = [field.name for field in Post._meta.get_fields()]
     list_display = ('user', 'rating',)
     list_filter = ('rating',)
-    # search_fields = ('title', 'cats__cat_name')
+    search_fields = ('user', 'rating',)
     actions = [nullify_rating]
 
 

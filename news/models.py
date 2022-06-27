@@ -161,7 +161,7 @@ class Post(models.Model):
         return f'{self.body}'
 
     def get_cat(self):
-        return f'{self.type}'
+        return '\n'.join([c.cat_name for c in self.cats.all()])  # f'{self.type}'
     
     def save(self, *args, **kwargs):
         self.isUpdated = False
