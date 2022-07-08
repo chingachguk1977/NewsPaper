@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
+import logging
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,3 +32,9 @@ urlpatterns = [
     # path('appointments/', include(('appointment.urls', 'appointments'), namespace='appointments')),
 
 ]
+
+logger_dr = logging.getLogger('django.request')
+logger_cn = logging.getLogger('django')
+
+logger_dr.error("Hello! I'm an error in your app. Enjoy:)")
+logger_cn.error("Hello! I'm another error in your app. Enjoy:)")

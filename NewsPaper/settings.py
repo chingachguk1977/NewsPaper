@@ -30,7 +30,7 @@ load_dotenv(dotenv_path)
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -162,6 +162,13 @@ EMAIL_SUBJECT_PREFIX = '[Django Tutorial] --> '
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 
+ADMINS = [
+    ('romab-gm', os.getenv('ADMIN_1_EMAIL')),
+    ('romab-ya', os.getenv('ADMIN_2_EMAIL')),
+    # список всех админов в формате ('имя', 'их почта')
+]
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
+
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -225,7 +232,7 @@ LOGGING = {
             'format': f'{ORIGIN_COLOR}%(asctime)s :{GREEN}: %(levelname)s :{ORIGIN_COLOR}: %(message)s'
         },
         'verbose': {
-            'format': f'{YELLOW}%(levelname)s %(asctime)s :{ORIGIN_COLOR}: \
+            'format': f'{YELLOW}%(levelname)s {ORIGIN_COLOR} %(asctime)s :: \
                        %(pathname)s %(module)s %(process)d %(thread)d %(message)s'
         },
         'error_format': {
@@ -383,7 +390,7 @@ LOGGING = {
 #         'errors': {
 #             'level': 'ERROR',
 #             'class': 'logging.FileHandler',
-#             'filename': 'errors.log',
+#             'filename': 'error.log',
 #             'formatter': 'forerror'
 #         },
 #         'console': {
