@@ -32,11 +32,11 @@ As of D13 final task:
 
 ***Отправляются.***
 
-<img src = "https://github.com/chingachguk1977/NewsPaper/blob/main/Screenshot from 2022-07-08 20-35-20_error1.png" alt="drawing" style="width:800px;">
+<img src = "https://github.com/chingachguk1977/NewsPaper/blob/main/Screenshot from 2022-07-08 20-35-20_error1.png" alt="drawing" style="width:400px;">
 
 ****
 
-<img src = "https://github.com/chingachguk1977/NewsPaper/blob/main/Screenshot from 2022-07-08 20-36-04_error2.png" alt="drawing" style="width:800px;">
+<img src = "https://github.com/chingachguk1977/NewsPaper/blob/main/Screenshot from 2022-07-08 20-36-04_error2.png" alt="drawing" style="width:400px;">
 
 
 ****
