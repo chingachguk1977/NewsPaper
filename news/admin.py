@@ -20,6 +20,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'time_pub', 'body', 'get_cat', 'rating',)
     list_filter = ('rating', 'time_pub',)
     search_fields = ('title', 'cats__cat_name')
+    list_per_page = 5
     actions = [nullify_rating]
 
 

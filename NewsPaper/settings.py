@@ -228,9 +228,9 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'formatters': {
-        'simple': {
-            'format': f'{ORIGIN_COLOR}%(asctime)s :{GREEN}: %(levelname)s :{ORIGIN_COLOR}: %(message)s'
-        },
+        # 'simple': {
+        #     'format': f'{ORIGIN_COLOR}%(asctime)s :{GREEN}: %(levelname)s :{ORIGIN_COLOR}: %(message)s'
+        # },
         'verbose': {
             'format': f'{YELLOW}%(levelname)s {ORIGIN_COLOR} %(asctime)s :: \
                        %(pathname)s %(module)s %(process)d %(thread)d %(message)s'
@@ -262,12 +262,12 @@ LOGGING = {
 
     },
     'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'filters': ['require_debug_true'],
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
+        # 'console': {
+        #     'level': 'DEBUG',
+        #     'filters': ['require_debug_true'],
+        #     'class': 'logging.StreamHandler',
+        #     'formatter': 'simple'
+        # },
         'console_warning': {
             'level': 'WARNING',
             'filters': ['require_debug_true'],
@@ -307,11 +307,11 @@ LOGGING = {
         }
     },
     'loggers': {
-        'django': {
-            'handlers': ['console', 'console_warning', 'console_error', 'file_info'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
+        # 'django': {
+        #     'handlers': ['console', 'console_warning', 'console_error', 'file_info'],
+        #     'level': 'DEBUG',
+        #     'propagate': True,
+        # },
         'django.request': {
             'handlers': ['mail_admins', 'file_error'],
             'level': 'ERROR',
