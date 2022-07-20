@@ -70,14 +70,23 @@ APSCHEDULER_RUN_NOW_TIMEOUT = 25  # Seconds
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # to activate lang localization
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+
+    # 'news.middleware.TimezoneMiddleware',
 ]
 
 ROOT_URLCONF = 'NewsPaper.urls'
+
+LOCALE_PATH = [
+    os.path.join(BASE_DIR, 'locale')
+]
 
 TEMPLATES = [
     {
@@ -177,9 +186,16 @@ if DEBUG:
 
 LANGUAGE_CODE = 'en-us'
 
+FILE_CHARSET = 'utf8'
+
 TIME_ZONE = 'Europe/Moscow'  # 'UTC'
 
 USE_I18N = True
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ru', 'Русский'),
+]
 
 USE_L10N = True
 
