@@ -21,6 +21,7 @@ import logging
 
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),  # встроенные end-points для локализации
     path('admin/', admin.site.urls),
     path('posts/', include('news.urls')),
     path('', include('protect.urls')),

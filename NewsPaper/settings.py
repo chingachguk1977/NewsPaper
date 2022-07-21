@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import _locale
 
 # from decouple import config
 
@@ -37,6 +38,9 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+
+    'modeltranslation',  # обязательно впишите его перед админом
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    ### 'django.contrib.flatpages',
+    ### 'news.templatetags',
+    ### 'django_extensions',
 
     'django_filters',
 
@@ -79,20 +86,16 @@ MIDDLEWARE = [
 
     # 'debug_toolbar.middleware.DebugToolbarMiddleware',
 
-    # 'news.middleware.TimezoneMiddleware',
+    'news.middleware.TimezoneMiddleware',
 ]
 
 ROOT_URLCONF = 'NewsPaper.urls'
-
-LOCALE_PATH = [
-    os.path.join(BASE_DIR, 'locale')
-]
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
+        'APP_DIRS': True,  # disabled to make pypugjs work
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -184,22 +187,30 @@ if DEBUG:
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+_locale._getdefaultlocale = (lambda *args: ['en_us', 'utf8'])
+
+# LANGUAGE_CODE = 'en-us'
 
 FILE_CHARSET = 'utf8'
 
-TIME_ZONE = 'Europe/Moscow'  # 'UTC'
+TIME_ZONE = 'UTC'  # 'Europe/Moscow'
 
 USE_I18N = True
 
 LANGUAGES = [
-    ('en', 'English'),
+    ('en-us', 'English'),
     ('ru', 'Русский'),
+    # ('de', 'Deutsch'),
 ]
+MODELTRANSLATION_LANGUAGES = ('en', 'ru')
 
 USE_L10N = True
 
 USE_TZ = True
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -209,6 +220,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+
+### from pypugjs.ext.django.compiler import enable_pug_translations
+### enable_pug_translations()
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core.cache import cache
+from django.utils import timezone
+from django.utils.translation import gettext as _  # импортируем функцию для перевода
+import pytz  # импортируем стандартный модуль для работы с часовыми поясами
 from django.views.generic import (
     ListView,
     DetailView,
@@ -28,6 +31,7 @@ from django.core.mail import EmailMultiAlternatives  # импортируем к
 from django.shortcuts import redirect
 from django.template.loader import render_to_string  # импортируем функцию, которая срендерит наш html в текст
 from django.urls import resolve
+from django.utils.translation import gettext as _  # импортируем функцию для перевода
 
 from datetime import datetime
 from django.urls import reverse_lazy
@@ -65,9 +69,11 @@ class PostsList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category_name'] = Category.objects.all()
-        context['time_now'] = datetime.now()
+        context['time_now'] = timezone.now()  # datetime.now()
         context['filterset'] = self.filterset
         context['qs_len'] = len(Post.objects.all())
+        # добавляем в контекст все доступные часовые пояса:
+        context['timezones'] = pytz.common_timezones
         return context
 
 
@@ -79,8 +85,9 @@ class PostDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     )
     context_object_name = 'post'
     
-    def get_object(self, *args, **kwargs): # переопределяем метод получения объекта
-        # кэш очень похож на словарь, и метод get действует также. 
+    def get_object(self, *args, **kwargs):  # переопределяем метод получения объекта
+        print(settings.LANGUAGE_CODE)
+        # кэш очень похож на словарь, и метод get действует так же.
         # Он забирает значение по ключу, если его нет, то забирает None.
         obj = cache.get(f'post-{self.kwargs["pk"]}', None)
  
@@ -127,7 +134,6 @@ class PostCreate(PermissionRequiredMixin, CreateView):
         DAILY_POST_LIMIT = 30
         error_message = f'No more than {DAILY_POST_LIMIT} posts a day, dude!'
         posts = Post.objects.all()
-        
 
         today_posts_count = 0
         for post in posts:

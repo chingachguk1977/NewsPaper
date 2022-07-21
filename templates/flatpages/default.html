@@ -1,25 +1,36 @@
 <!DOCTYPE html>
+        {% load i18n %}
+        {% load tz %} <!-- не забываем загрузить тег для работы с часовыми поясами -->
+        {% load static %}
+        {% load custom_filters %}
+        {% load custom_tags %}
+        {% load cache %}
 <html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Bare - Start Bootstrap Template</title>
-
-        {% load static %}
-        {% load cache %}
+        <title>News Portal</title>
 
         <!-- Favicon-->
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <style>
+          body {background-color:
+                 {% if current_time.hour >= 19 or current_time.hour <= 7 %}
+                     darkcyan
+                 {% else %}
+                     powderblue
+                 {% endif %};}
+        </style>
     </head>
 
     <body>
-        {% cache 300 header %}
+        {% cache 3 header %}
             {% block header %}
                 <!-- Responsive navbar-->
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+              <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
                 <div class="container">
                     <a class="navbar-brand" href="#">News Portal</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -31,38 +42,75 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Home
-                                    <span class="sr-only">(current)</span>
-                                </a>
+                                <a class="nav-link" href="#">{% trans "Home" %}</a>
+                            </li>
+                            {% if user.is_superuser%}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="http://127.0.0.1:8000/admin">{% trans "Admin" %}</a>
+                                </li>
+                            {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'sign:profile_update' %}">{% trans "Profile" %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="http://127.0.0.1:8000/admin">Admin</a>
+                                <a class="nav-link" href="{% url 'news:post_list' %}">{% trans "Posts" %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'sign:profile_update' %}">Profile</a>
+                                <a class="nav-link" href="{% url 'news:post_create' %}">{% trans "Create Post" %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'news:post_list' %}">Posts</a>
+                                <a class="nav-link" href="{% url 'news:post_search' %}">{% trans "Search" %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'news:post_create' %}">Create Post</a>
+                                <a class="nav-link" href="{% url 'sign:login' %}">{% trans "Login" %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'news:post_search' %}">Search</a>
+                                <a class="nav-link" href="{% url 'sign:logout' %}">{% trans "Logout" %}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'sign:login' %}">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'sign:logout' %}">Logout</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'sign:signup' %}">Sign Up</a>
+                                <a class="nav-link" href="{% url 'sign:signup' %}">{% trans "Sign Up" %}</a>
                             </li>
                         </ul>
+<!-- Локализация по языку -->
+                        <form action="{% url 'set_language' %}" method="POST"
+                              style = "margin: 5px 1em 0 auto; display: flex; justify-content: center;">
+                            {% csrf_token %}  <!-- csrf_token для POST запросов -->
+                          <input type="hidden" name="next" value="{{ redirect_to }}">
+
+                          <select name="language" id="" class="locale">
+                            {% get_available_languages as LANGUAGES %}  <!-- получаем языки -->
+                            {% get_language_info_list for LANGUAGES as languages %}
+                            <!-- Помещаем их в список languages -->
+                            {% for language in languages %}
+                                <!-- Итерируясь по списку, выводим их название на языке пользователя и код -->
+                                <option value="{{ language.code }}"
+                                   {%if language.code == LANGUAGE_CODE %} selected {%endif%}>
+                                        {{ language.name_local }} - {{ language.code }}
+                                </option>
+                            {% endfor %}
+                          </select>
+                          <input type="submit" value="set" class="button-secondary">
+                        </form>
+<!-- Локализация по часовым поясам -->
+                        {% get_current_timezone as TIME_ZONE %}
+                            <form action="" method="POST"
+                                  style="margin: 5px 1em 0 auto; display: flex; justify-content: center;">
+                                {% csrf_token %}
+                                <label for="timezone">Time zone:</label>
+                                <select name="timezone">
+                                    {% for tz in timezones %}
+                                        <option
+                                          value="{{ tz }}"{% if tz == TIME_ZONE %} selected {% endif %}>{{ tz }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                <input type="submit" value="set" class="button-secondary">
+                            </form>
+
+
                     </div>
                 </div>
-                </nav>
+              </nav>
             {% endblock header %}
         {% endcache %}
 
@@ -75,7 +123,7 @@
                    {% endblock content %}
                </div>
                <!-- Кэшируем отдельный блок на 300 секунд -->
-               {% cache 300 footer %}
+               {% cache 3 footer %}
                 {% block footer %}
                     <div class="footer">
                         <div class="pure-menu pure-menu-horizontal">
@@ -86,9 +134,47 @@
                         </ul>
                         </div>
                     </div>
+
+<!-- Пагинация -->
+     <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                <a class="page-link" href="?{% url_replace page=1 %}" tabindex="-1">{% trans "FIRST" %}</a>
+            </li>
+            <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+                <a class="page-link" href="{% if page_obj.has_previous %}?{% url_replace page=page_obj.previous_page_number %}{% endif %} " tabindex="-1">{% trans "Previous" %}</a>
+            </li>
+
+            {% if page_obj.number|add:'-4' > 1 %}
+                <li class="page-item disabled"><a class="page-link" href="?{% url_replace page=page_obj.number|add:'-5' %}">&hellip;</a></li>
+            {% endif %}
+
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="active page-item disabled"><a class="page-link" href="?{% url_replace page=i %}">{{ i }}</a></li>
+                {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
+                    <li class="page-item"><a class="page-link" href="?{% url_replace page=i %}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
+                <li class="page-item disabled"><a class="page-link" href="?{% url_replace page=page_obj.number|add:'5' %}">&hellip;</a></li>
+            {% endif %}
+
+            <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                <a class="page-link" href="{% if page_obj.has_next %} ?{% url_replace page=page_obj.next_page_number %} {% endif %}">{% trans "Next" %}</a>
+            </li>
+            <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+                <a class="page-link" href="{% if page_obj.has_next %} ?{% url_replace page=page_obj.paginator.num_pages %}  {% endif %}">{% trans "LAST" %}</a>
+            </li>
+        </ul>
+    </nav>
                 {% endblock footer %}
                {% endcache %}
            </div>
         </div>
     </body>
+
+
 </html>

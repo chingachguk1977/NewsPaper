@@ -13,6 +13,7 @@ WORDS_TO_CATCH = [
     'comment',
     'is',
     'one',
+    'номер',
 ]
 
 

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 # Импортируем созданное нами представление
 from .views import (
    PostsList,
@@ -39,6 +39,8 @@ urlpatterns = [
    # path('type/<str:title>', cache_page(60*5)(PostType.as_view()), name='post_type'),
       
    # без кеша (кешируем на низком уровне)
+   # подключаем встроенные эндопинты для работы с локализацией
+   path('i18n/', include('django.conf.urls.i18n')),
    path('', PostsList.as_view(), name='post_list'),
    path('<int:pk>', PostDetail.as_view(), name='post_detail'),
    path('create/', PostCreate.as_view(), name='post_create'),

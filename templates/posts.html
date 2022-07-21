@@ -1,26 +1,27 @@
 <!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
 {% extends 'flatpages/default.html' %}
-
+{% load i18n %}
 {% load custom_filters %}
 {% load custom_tags %}
 
 <!-- Название у нас будет Posts -->
 {% block title %}
-    <h1>Posts</h1>
+    <h1>{% trans "Posts" %}</h1>
 {% endblock title %}
 
 <!-- В контенте на странице мы выводим все посты -->
 {% block content %}
-<h1> {{ time_now|date:'d F Y, H:i' }} MSK</h1>
+<h1> {{ time_now|date:'d F Y, H:i' }}</h1>
 
 <h1>
     {% if qs_len > 1 %}
-      There are {{ qs_len }} posts in the DB
+      {% trans "There are" %} {{ qs_len }} {% trans "posts in the DB" %}
     {% elif qs_len == 1 %}
-      There is only 1 post in the DB
+      {% trans "There is only 1 post in the DB" %}
     {% elif qs_len == 0 %}
-      There are no posts in the DB
+      {% trans "There are no posts in the DB" %}
     {% endif %}
+
 
 </h1>
 
@@ -37,20 +38,20 @@
     <table border="1" width="100%" cellpadding="5">
       <thead>
         <tr>
-            <th>Author</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Preview</th>
-            <th>Category</th>
-            <th>Rating</th>
-            <th># of comments</th>
+            <th>{% trans "Author" %}</th>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Preview" %}</th>
+            <th>{% trans "Categories" %}</th>
+            <th>{% trans "Rating" %}</th>
+            <th>{% trans "# of comments" %}</th>
         </tr>
       </thead>
       <tbody>
         {% for post in posts %}
             <tr>
-                <td><a href="{% url 'news:author_name' post.author_id %}"> {{ post.author }}</td>
-                <td><a href="{% url 'news:post_detail' post.id %}"> {{ post.title|censor }}</td>
+                <td><a href="{% url 'news:author_name' post.author_id %}"> {{ post.author }}</a></td>
+                <td><a href="{% url 'news:post_detail' post.id %}"> {{ post.title|censor }}</a></td>
                 <td>{{ post.time_pub|date:'d M Y H:i' }}</td>
                 <td>{{ post.body|truncatechars:30|censor }}</td>
                 <td>{% for cat in post.cats.all %}
@@ -70,44 +71,8 @@
 {% endif %}
 
 
-   {# Добавляем пагинацию на страницу #}
 
-     <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-
-            <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
-                <a class="page-link" href="?{% url_replace page=1 %}" tabindex="-1">FIRST</a>
-            </li>
-            <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
-                <a class="page-link" href="{% if page_obj.has_previous %}?{% url_replace page=page_obj.previous_page_number %}{% endif %} " tabindex="-1">Previous</a>
-            </li>
-
-            {% if page_obj.number|add:'-4' > 1 %}
-                <li class="page-item disabled"><a class="page-link" href="?{% url_replace page=page_obj.number|add:'-5' %}">&hellip;</a></li>
-            {% endif %}
-
-            {% for i in page_obj.paginator.page_range %}
-                {% if page_obj.number == i %}
-                    <li class="active page-item disabled"><a class="page-link" href="?{% url_replace page=i %}">{{ i }}</a></li>
-                {% elif i > page_obj.number|add:'-5' and i < page_obj.number|add:'5' %}
-                    <li class="page-item"><a class="page-link" href="?{% url_replace page=i %}">{{ i }}</a></li>
-                {% endif %}
-            {% endfor %}
-
-            {% if page_obj.paginator.num_pages > page_obj.number|add:'4' %}
-                <li class="page-item disabled"><a class="page-link" href="?{% url_replace page=page_obj.number|add:'5' %}">&hellip;</a></li>
-            {% endif %}
-
-            <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
-                <a class="page-link" href="{% if page_obj.has_next %} ?{% url_replace page=page_obj.next_page_number %} {% endif %}">Next</a>
-            </li>
-            <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
-                <a class="page-link" href="{% if page_obj.has_next %} ?{% url_replace page=page_obj.paginator.num_pages %}  {% endif %}">LAST</a>
-            </li>
-        </ul>
-    </nav>
-
-<!--ОЧЕНЬ КРАСИВЫЙ РАБОЧИЙ ВАРИАНТ-->
+<!--ПАГИНАЦИЯ ОЧЕНЬ КРАСИВЫЙ РАБОЧИЙ ВАРИАНТ-->
 
 <!--<nav aria-label="Page navigation">   <ul class="pagination">-->
 <!--{% if page_obj.has_previous %}-->

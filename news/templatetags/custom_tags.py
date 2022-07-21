@@ -1,13 +1,14 @@
-from datetime import datetime
-
 from django import template
+from django.utils import timezone
+# from datetime import datetime
+
 
 register = template.Library()
 
 
 @register.simple_tag()
 def current_time(format_string='%b %d %Y'):
-    return datetime.now().strftime(format_string)
+    return timezone.now()  # .strftime(format_string)
 
 
 @register.simple_tag(takes_context=True)
