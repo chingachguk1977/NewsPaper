@@ -4,6 +4,8 @@ from django.db import models
 from django_filters import FilterSet, ModelMultipleChoiceFilter, ModelChoiceFilter, NumberFilter, DateFilter
 from .models import Post, Category, Author
 
+from django.utils.translation import gettext_lazy as _  # ленивый геттекст с подсказкой
+
 
 # Создаем свой набор фильтров для модели Product.
 # FilterSet, который мы наследуем,
@@ -12,7 +14,7 @@ class PostFilter(FilterSet):
     category = ModelMultipleChoiceFilter(
         field_name='postcategory__cat_thru',
         queryset=Category.objects.all(),
-        label='Category',
+        label=_('Category'),
         #empty_label='Any',  # нужно, только если ModelChoiceFilter, а не ModelMultipleChoiceFilter
         conjoined=True,  # нужно, только если ModelMultipleChoiceFilter, а не ModelChoiceFilter
                            # также нужно, если множественный фильтр работал по AND, а не по OR
@@ -21,7 +23,7 @@ class PostFilter(FilterSet):
     author = ModelChoiceFilter(
         field_name='author',
         queryset=Author.objects.all(),
-        label='Author',
+        label=_('Author'),
         empty_label='Any',  # нужно, только если ModelChoiceFilter, а не ModelMultipleChoiceFilter
         #conjoined=True,  # нужно, только если ModelMultipleChoiceFilter, а не ModelChoiceFilter
                            # также нужно, если множественный фильтр работал по AND, а не по OR

@@ -3796,3 +3796,543 @@ Traceback (most recent call last):
 django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 148: 'url_replace', expected 'endblock'. Did you forget to register or load this tag?
 ERROR 2022-07-21 19:57:00,602 "GET /posts/ HTTP/1.1" 500 303802 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
 ERROR 2022-07-21 20:03:50,087 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 19:20:23,724 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 19:30:13,310 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 19:51:46,300 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:11:56,180 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:11:58,990 Internal Server Error: /posts/ /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.urls.exceptions.NoReverseMatch'>, NoReverseMatch("Reverse for 'set_timezone' not found. 'set_timezone' is not a valid view function or pattern name."), <traceback object at 0x7f5f7e403f80>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/templatetags/cache.py", line 53, in render
+    value = self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/defaulttags.py", line 472, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/urls/resolvers.py", line 802, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'set_timezone' not found. 'set_timezone' is not a valid view function or pattern name.
+ERROR 2022-07-22 20:11:58,991 "GET /posts/ HTTP/1.1" 500 335092 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 20:18:17,898 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:18:20,520 Internal Server Error: /posts/ /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.urls.exceptions.NoReverseMatch'>, NoReverseMatch("Reverse for 'set_timezone' not found. 'set_timezone' is not a valid view function or pattern name."), <traceback object at 0x7f8f20336d40>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/templatetags/cache.py", line 53, in render
+    value = self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/defaulttags.py", line 472, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/urls/base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/urls/resolvers.py", line 802, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'set_timezone' not found. 'set_timezone' is not a valid view function or pattern name.
+ERROR 2022-07-22 20:18:20,522 "GET /posts/ HTTP/1.1" 500 335092 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 20:21:01,062 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:21:50,989 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:27:23,641 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:35:50,110 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:41:57,641 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:43:15,073 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:52:19,438 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:53:11,689 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:58:05,856 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 20:59:19,558 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:01:50,516 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:03:33,279 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:05:41,339 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:06:39,193 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:16:32,886 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:16:52,896 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f4b6ea67800>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 409, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:16:52,897 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:17:34,435 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f4b6eaa7100>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 409, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:17:34,435 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:22:08,222 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:22:10,108 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f538937bc40>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 409, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:22:10,109 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:22:33,447 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:22:34,825 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f2bd0ac4440>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 409, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:22:34,825 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:22:37,958 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f2bd1be4240>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 409, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:22:37,958 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:22:41,498 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f2bd0af7c00>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 409, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:22:41,499 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:24:34,225 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:24:35,208 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f234ebd5080>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 407, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:24:35,209 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:24:37,874 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f234ec2b680>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 407, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:24:37,875 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:25:22,791 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:25:24,005 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f7cab3c3680>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 407, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:25:24,006 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:25:27,170 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f7cab3e7200>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 407, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:25:27,170 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:25:52,366 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:25:54,152 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'ValueError'>, ValueError('localtime() cannot be applied to a naive datetime'), <traceback object at 0x7f34c4061700>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 403, in set_timezone
+    'current_time': timezone.localtime(datetime.now()),
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/timezone.py", line 206, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+ERROR 2022-07-22 21:25:54,153 "POST /posts/settz HTTP/1.1" 500 80669 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:25:59,482 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'ValueError'>, ValueError('localtime() cannot be applied to a naive datetime'), <traceback object at 0x7f34c41a6540>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 403, in set_timezone
+    'current_time': timezone.localtime(datetime.now()),
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/timezone.py", line 206, in localtime
+    raise ValueError("localtime() cannot be applied to a naive datetime")
+ValueError: localtime() cannot be applied to a naive datetime
+ERROR 2022-07-22 21:25:59,482 "POST /posts/settz HTTP/1.1" 500 80669 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:26:20,690 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:26:21,980 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7fc0bef1fa40>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 407, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:26:21,981 "POST /posts/settz HTTP/1.1" 500 90226 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:26:24,638 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7fc0c40cdcc0>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 407, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:26:24,638 "POST /posts/settz HTTP/1.1" 500 90226 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:28:23,714 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:28:27,304 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f6cf15ed3c0>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 411, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:28:27,305 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:28:36,979 Internal Server Error: /posts/settz /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'django.utils.datastructures.MultiValueDictKeyError'>, MultiValueDictKeyError('timezone'), <traceback object at 0x7f6cf27238c0>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 84, in __getitem__
+    list_ = super().__getitem__(key)
+KeyError: 'timezone'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 411, in set_timezone
+    request.session['django_timezone'] = request.POST['timezone']
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/datastructures.py", line 86, in __getitem__
+    raise MultiValueDictKeyError(key)
+django.utils.datastructures.MultiValueDictKeyError: 'timezone'
+ERROR 2022-07-22 21:28:36,979 "POST /posts/settz HTTP/1.1" 500 90247 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-07-22 21:29:26,979 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-07-22 21:30:55,045 Internal Server Error: /posts/create/ /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'kombu.exceptions.OperationalError'>, OperationalError('Error 111 connecting to 127.0.0.1:6379. Connection refused.'), <traceback object at 0x7f3c3e262ac0>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 609, in connect
+    sock = self.retry.call_with_retry(
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 610, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 675, in _connect
+    raise err
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 663, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 119, in reconnect_on_error
+    yield
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 169, in _consume_from
+    self._pubsub.subscribe(key)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/client.py", line 1589, in subscribe
+    ret_val = self.execute_command("SUBSCRIBE", *new_channels.keys())
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/client.py", line 1430, in execute_command
+    self.connection = self.connection_pool.get_connection(
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 1383, in get_connection
+    connection.connect()
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 615, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 609, in connect
+    sock = self.retry.call_with_retry(
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/retry.py", line 46, in call_with_retry
+    return do()
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 610, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 675, in _connect
+    raise err
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 663, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/kombu/connection.py", line 446, in _reraise_as_library_errors
+    yield
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/app/base.py", line 787, in send_task
+    self.backend.on_task_call(P, task_id)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 365, in on_task_call
+    self.result_consumer.consume_from(task_id)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 161, in consume_from
+    return self.start(task_id)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 139, in start
+    self._consume_from(initial_task_id)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 168, in _consume_from
+    with self.reconnect_on_error():
+  File "/usr/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 122, in reconnect_on_error
+    self._ensure(self._reconnect_pubsub, ())
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 376, in ensure
+    return retry_over_time(
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/kombu/utils/functional.py", line 312, in retry_over_time
+    return fun(*args, **kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/backends/redis.py", line 106, in _reconnect_pubsub
+    metas = self.backend.client.mget(self.subscribed_to)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/commands/core.py", line 1887, in mget
+    return self.execute_command("MGET", *args, **options)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/client.py", line 1232, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 1383, in get_connection
+    connection.connect()
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/redis/connection.py", line 615, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/contrib/auth/mixins.py", line 109, in dispatch
+    return super().dispatch(request, *args, **kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 119, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 184, in post
+    return super().post(request, *args, **kwargs)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/views/generic/edit.py", line 153, in post
+    return self.form_valid(form)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/news/views.py", line 150, in form_valid
+    new_post_subscription.apply_async([id_new_post], countdown = 5)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/app/task.py", line 575, in apply_async
+    return app.send_task(
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/celery/app/base.py", line 785, in send_task
+    with P.connection._reraise_as_library_errors():
+  File "/usr/lib/python3.10/contextlib.py", line 153, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/kombu/connection.py", line 450, in _reraise_as_library_errors
+    raise ConnectionError(str(exc)) from exc
+kombu.exceptions.OperationalError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
+ERROR 2022-07-22 21:30:55,047 "POST /posts/create/ HTTP/1.1" 500 285477 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None

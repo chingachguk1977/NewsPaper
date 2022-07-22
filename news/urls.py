@@ -13,7 +13,7 @@ from .views import (
    subscribe_to_category,
    unsubscribe_from_category,
    PostType,
-   PostTag, subscribe_to_author, unsubscribe_from_author
+   PostTag, subscribe_to_author, unsubscribe_from_author, set_timezone,
 )
 
 # нужно добавлять кэширование напрямую в urls.py (в котором хранятся именно сами представления, 
@@ -54,6 +54,7 @@ urlpatterns = [
    path('unsubscribe/author/<int:pk>', unsubscribe_from_author, name='unsub_author'),
    path('tag/<int:pk>', PostTag.as_view(), name='post_tag'),
    path('type/<str:title>', PostType.as_view(), name='post_type'),
+   path('settz', set_timezone, name='set_timezone'),
    
    # ненужные урлы
    # path('profile_update/', ProfileUpdate.as_view(), name='profile_update'),

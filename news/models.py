@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.urls import reverse
 from django.core.cache import cache
-from django.utils.translation import gettext as _
-from django.utils.translation import pgettext_lazy  # ленивый геттекст с подсказкой
+# from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _  # ленивый геттекст с подсказкой
 
 
 class Author(models.Model):
@@ -55,21 +55,21 @@ class Author(models.Model):
         # return f'{self.user.username}, rating = {self.rating}'
 
     class Meta:
-        verbose_name = _('author')
-        verbose_name_plural = _('authors')
+        verbose_name = _('Author')
+        verbose_name_plural = _('Authors')
 
 
 class Category(models.Model):
     cat_name = models.CharField(
         max_length=64,
         unique=True,
-        help_text=_('category'),
+        help_text=_('Category'),
     )
     subscribers = models.ManyToManyField(
         User,
         through='CategorySubscribers',
         blank=True,
-        verbose_name=pgettext_lazy(
+        verbose_name=_(
             'help text for Category subscribers',
             'subscribers',
         ),
@@ -91,8 +91,8 @@ class Category(models.Model):
         return cat.subscribers.filter(id=user.id).exists()
 
     class Meta:
-        verbose_name = _('category')
-        verbose_name_plural = _('categories')
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
 
 class Post(models.Model):
@@ -107,7 +107,7 @@ class Post(models.Model):
     type = models.CharField(verbose_name=_('type'), max_length=2,
                             choices=POST_CHOICES, default=NEWS)
     time_pub = models.DateTimeField(
-        _('time_pub'),
+        verbose_name=_('time_pub'),
         auto_now_add=True,
         # default=timezone.now,
     )
@@ -117,13 +117,13 @@ class Post(models.Model):
     author = models.ForeignKey(
         Author,
         on_delete=models.CASCADE,
-        verbose_name=pgettext_lazy('help text for Post author', 'author'),
+        verbose_name=_('help text for Post author', 'Author'),
         related_name='author',
     )
     cats = models.ManyToManyField(
         Category,
         through='PostCategory',
-        verbose_name=_('category'),
+        verbose_name=_('Category'),
     )
     isUpdated = models.BooleanField(_('edited'), default=False)
 
@@ -167,21 +167,21 @@ class Post(models.Model):
         cache.delete(f'post-{self.pk}')  # затем удаляем его из кэша, чтобы сбросить его
 
     class Meta:
-        verbose_name = _('post')
-        verbose_name_plural = _('posts')
+        verbose_name = _('Post')
+        verbose_name_plural = _('Posts')
 
 
 class CategorySubscribers(models.Model):
     subscriber_thru = models.ForeignKey(
         User,
-        verbose_name=_('subscriber'),
+        verbose_name=_('Subscriber'),
         on_delete=models.CASCADE,
         blank=True,
         null=True,
     )
     category_thru = models.ForeignKey(
         Category,
-        verbose_name=_('category'),
+        verbose_name=_('Category'),
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -200,8 +200,8 @@ class CategorySubscribers(models.Model):
         return f'{self.subscriber_thru} <-> {self.category_thru.cat_name}'
 
     class Meta:
-        verbose_name = _('subscription')
-        verbose_name_plural = _('subscriptions')
+        verbose_name = _('Subscription')
+        verbose_name_plural = _('Subscriptions')
 
 
 class AuthorSubscribers(models.Model):

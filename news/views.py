@@ -84,18 +84,18 @@ class PostDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
         'news.view_post',
     )
     context_object_name = 'post'
-    
+
     def get_object(self, *args, **kwargs):  # переопределяем метод получения объекта
         print(settings.LANGUAGE_CODE)
         # кэш очень похож на словарь, и метод get действует так же.
         # Он забирает значение по ключу, если его нет, то забирает None.
         obj = cache.get(f'post-{self.kwargs["pk"]}', None)
- 
+
         # если объекта нет в кэше, то получаем его и записываем в кэш
         if not obj:
-            obj = super().get_object(queryset=self.queryset) 
+            obj = super().get_object(queryset=self.queryset)
             cache.set(f'post-{self.kwargs["pk"]}', obj)
-        
+
         return obj
 
 
@@ -169,7 +169,7 @@ class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     )
     template_name = 'post_edit.html'
     success_url = '/posts/'
-    
+
     # метод get_object используем вместо queryset, чтобы получить информацию об объекте, 
     # который собираемся редактировать
     def get_object(self, **kwargs):
@@ -398,3 +398,15 @@ def unsubscribe_from_category(request, pk):
     if is_subscribed:
         cat.subscribers.remove(user)
     return redirect('/posts/')
+
+
+def set_timezone(request):
+    context = {
+        'current_time': timezone.localtime(timezone.now()),
+        'timezones': pytz.common_timezones,
+    }
+    if request.method == 'POST':
+        request.session['django_timezone'] = request.POST['timezone']
+        return redirect('/posts/')
+    else:
+        return render(request, 'default.html', context)

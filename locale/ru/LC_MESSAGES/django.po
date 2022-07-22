@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-21 19:12+0000\n"
+"POT-Creation-Date: 2022-07-22 21:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,26 +20,28 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: news/models.py:58
-msgid "author"
-msgstr "автор"
+#: news/filters.py:17 news/models.py:66 news/models.py:94 news/models.py:126
+#: news/models.py:184
+msgid "Category"
+msgstr "Категории"
+
+#: news/filters.py:26 news/models.py:58 templates/post_search.html:39
+#: templates/posts.html:41
+msgid "Author"
+msgstr "Автор"
 
 #: news/models.py:59
-msgid "authors"
-msgstr "авторы"
+msgid "Authors"
+msgstr "Авторы"
 
-#: news/models.py:66 news/models.py:94 news/models.py:126 news/models.py:184
-msgid "category"
-msgstr "категория"
+#: news/models.py:73
+msgid "help text for Category subscribers"
+msgstr ""
 
-#: news/models.py:74
-msgctxt "help text for Category subscribers"
-msgid "subscribers"
-msgstr "подписчики"
-
-#: news/models.py:95
-msgid "categories"
-msgstr "категории"
+#: news/models.py:95 templates/filtered.html:87 templates/post.html:16
+#: templates/post_search.html:42 templates/posts.html:45
+msgid "Categories"
+msgstr "Категории"
 
 #: news/models.py:107
 msgid "type"
@@ -62,33 +64,33 @@ msgid "rating"
 msgstr "рейтинг"
 
 #: news/models.py:120
-msgctxt "help text for Post author"
-msgid "author"
-msgstr "автор"
+msgid "help text for Post author"
+msgstr ""
 
 #: news/models.py:128
 msgid "edited"
 msgstr "изменено"
 
-#: news/models.py:170
-msgid "post"
-msgstr "пост"
+#: news/models.py:170 templates/post.html:8 templates/post_create.html:5
+msgid "Post"
+msgstr "Пост"
 
-#: news/models.py:171
-msgid "posts"
+#: news/models.py:171 templates/filtered.html:6
+#: templates/flatpages/default.html:56 templates/posts.html:9
+msgid "Posts"
 msgstr "Посты"
 
 #: news/models.py:177
-msgid "subscriber"
-msgstr "подписчик"
+msgid "Subscriber"
+msgstr "Подписчик"
 
 #: news/models.py:203
-msgid "subscription"
-msgstr "подписка"
+msgid "Subscription"
+msgstr "Подписка"
 
 #: news/models.py:204
-msgid "subscriptions"
-msgstr "подписки"
+msgid "Subscriptions"
+msgstr "Подписки"
 
 #: news/models.py:228
 msgid "comm_post"
@@ -121,11 +123,6 @@ msgstr "пост-категория"
 #: news/models.py:259
 msgid "post categories"
 msgstr "пост-категории"
-
-#: templates/filtered.html:6 templates/flatpages/default.html:58
-#: templates/posts.html:9
-msgid "Posts"
-msgstr "Посты"
 
 #: templates/filtered.html:11
 msgid "Filtered"
@@ -161,11 +158,7 @@ msgstr "Автор поста:"
 
 #: templates/filtered.html:78
 msgid "published on"
-msgstr "дата публикации:"
-
-#: templates/filtered.html:87
-msgid "Categories"
-msgstr "Категории"
+msgstr "дата публикации"
 
 #: templates/filtered.html:97
 msgid "Post rating"
@@ -175,58 +168,106 @@ msgstr "рейтинг поста:"
 msgid "There are no posts"
 msgstr "Постов нет"
 
-#: templates/flatpages/default.html:47
+#: templates/flatpages/default.html:45
 msgid "Home"
 msgstr "Домой"
 
-#: templates/flatpages/default.html:51
+#: templates/flatpages/default.html:49
 msgid "Admin"
 msgstr "Админ-панель"
 
-#: templates/flatpages/default.html:55
+#: templates/flatpages/default.html:53
 msgid "Profile"
-msgstr "Мой профиль"
+msgstr "Профиль"
 
-#: templates/flatpages/default.html:61
+#: templates/flatpages/default.html:59
 msgid "Create Post"
 msgstr "Создать пост"
 
-#: templates/flatpages/default.html:64
+#: templates/flatpages/default.html:62 templates/post_search.html:9
 msgid "Search"
 msgstr "Поиск"
 
-#: templates/flatpages/default.html:67
+#: templates/flatpages/default.html:65
 msgid "Login"
 msgstr "Войти"
 
-#: templates/flatpages/default.html:70
+#: templates/flatpages/default.html:68
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/flatpages/default.html:73
+#: templates/flatpages/default.html:71
 msgid "Sign Up"
 msgstr "Регистрация"
 
-#: templates/flatpages/default.html:150
+#: templates/flatpages/default.html:145
 msgid "FIRST"
 msgstr "НА ПЕРВУЮ"
 
-#: templates/flatpages/default.html:153
+#: templates/flatpages/default.html:148
 msgid "Previous"
 msgstr "На предыдущую"
 
-#: templates/flatpages/default.html:173
+#: templates/flatpages/default.html:168
 msgid "Next"
 msgstr "На следующую"
 
-#: templates/flatpages/default.html:176
+#: templates/flatpages/default.html:171
 msgid "LAST"
 msgstr "НА ПОСЛЕДНЮЮ"
+
+#: templates/main.html:6
+msgid "Sign-Up / Sign-In"
+msgstr "Регистрация / Войти"
+
+#: templates/post.html:14
+msgid "Published on"
+msgstr "Дата публикации"
+
+#: templates/post.html:18
+msgid "Comments"
+msgstr "Комментарии"
+
+#: templates/post.html:25
+msgid "wrote"
+msgstr "написал(а)"
+
+#: templates/post.html:26
+msgid "The rating of the comment is"
+msgstr "Рейтинг комментария -"
+
+#: templates/post.html:32
+msgid "No comments"
+msgstr "Комментариев нет"
+
+#: templates/post_create.html:10
+msgid "Save"
+msgstr "Сохранить"
 
 #: templates/post_search.html:27
 #, python-format
 msgid " %(filterset_len)s posts found: "
 msgstr "Найдено %(filterset_len)s постов: "
+
+#: templates/post_search.html:38 templates/posts.html:42
+msgid "Title"
+msgstr "Заголовок"
+
+#: templates/post_search.html:40 templates/posts.html:43
+msgid "Date"
+msgstr "Дата публикации"
+
+#: templates/post_search.html:41 templates/posts.html:44
+msgid "Preview"
+msgstr "Превью"
+
+#: templates/post_search.html:43 templates/posts.html:46
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: templates/post_search.html:61
+msgid "Nothing found"
+msgstr "Ничего не найдено"
 
 #: templates/posts.html:18
 msgid "There are"
@@ -244,33 +285,42 @@ msgstr "В базе только 1 пост"
 msgid "There are no posts in the DB"
 msgstr "Постов в базе нет"
 
-#: templates/posts.html:41
-msgid "Author"
-msgstr "Автор"
-
-#: templates/posts.html:42
-msgid "Title"
-msgstr "Заголовок"
-
-#: templates/posts.html:43
-msgid "Date"
-msgstr "Дата публикации"
-
-#: templates/posts.html:44
-msgid "Preview"
-msgstr "Превью"
-
-#: templates/posts.html:45
-msgid "Category"
-msgstr "Категории"
-
-#: templates/posts.html:46
-msgid "Rating"
-msgstr "Рейтинг"
-
 #: templates/posts.html:47
 msgid "# of comments"
 msgstr "Кол-во комментариев"
+
+#: templates/posts.html:70
+msgid "There are no news"
+msgstr "Постов нет"
+
+#~ msgid "category"
+#~ msgstr "категория"
+
+#~ msgid "categories"
+#~ msgstr "категории"
+
+#~ msgid "post"
+#~ msgstr "пост"
+
+#~ msgid "posts"
+#~ msgstr "Посты"
+
+#~ msgid "subscriber"
+#~ msgstr "подписчик"
+
+#~ msgid "author"
+#~ msgstr "автор"
+
+#~ msgid "authors"
+#~ msgstr "авторы"
+
+#~ msgctxt "help text for Category subscribers"
+#~ msgid "subscribers"
+#~ msgstr "подписчики"
+
+#~ msgctxt "help text for Post author"
+#~ msgid "author"
+#~ msgstr "автор"
 
 #~ msgid "user"
 #~ msgstr "пользователь"

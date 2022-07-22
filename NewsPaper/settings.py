@@ -124,7 +124,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-        'OPTIONS': {'timeout': 5, }
+        'OPTIONS': {'timeout': 5, },
+        'TIME_ZONE': 'UTC',
     }
 }
 
@@ -207,6 +208,8 @@ MODELTRANSLATION_LANGUAGES = ('en', 'ru')
 USE_L10N = True
 
 USE_TZ = True
+
+USE_DEPRECATED_PYTZ = True
 
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale')

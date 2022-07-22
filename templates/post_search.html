@@ -6,7 +6,7 @@
 
 {% block content %}
 
-    <h1>Search</h1>
+    <h1>{% trans "Search" %}</h1>
 
 <h1> {{ time_now|date:'d F Y, H:i' }}</h1>
 
@@ -35,12 +35,12 @@
 
 <table border="1" width="100%" cellpadding="5" rules="3">
         <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Date</th>
-            <th>Preview</th>
-            <th>Category</th>
-            <th>Rating</th>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "Author" %}</th>
+            <th>{% trans "Date" %}</th>
+            <th>{% trans "Preview" %}</th>
+            <th>{% trans "Categories" %}</th>
+            <th>{% trans "Rating" %}</th>
         </tr>
 {% for post in posts %}
         <tr>
@@ -58,7 +58,7 @@
 {% endfor %}
 </table>
 {% else %}
-    <h2>Nothing found!</h2>
+    <h2>{% trans "Nothing found" %}!</h2>
 {% endif %}
     <hr>
 
