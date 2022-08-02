@@ -1,5 +1,5 @@
 from django import template
-import re
+from re import sub  # функция замены из модуля регулярных выражений
 
 register = template.Library()
 
@@ -27,7 +27,7 @@ def censor(text_to_check):
     # Игнорирует регистр
     # Игнорирует пунктуацию
 
-    new_text = re.sub(r'[^\w\s]', '', text_to_check)
+    new_text = sub(r'[^\w\s]', '', text_to_check)  # убирает все пробельные символы из переданной строки
     word_list = new_text.strip().split()
 
     # на всякий случай приведем все строки в списке стоп-слов к нижнему регистру,
