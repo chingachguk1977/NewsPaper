@@ -4548,3 +4548,5 @@ Traceback (most recent call last):
 TypeError: gettext() takes 1 positional argument but 2 were given
 ERROR 2022-08-02 07:23:02,453 "GET /admin/news/post/ HTTP/1.1" 500 145 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
 ERROR 2022-08-02 07:23:30,591 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-02 09:47:12,045 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-02 09:47:59,777 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
