@@ -2,7 +2,7 @@ sendgrid.env
 .env
 **/__pycache__
 **/cache_files
-**/*.pyc
+*.pyc
 *.sqlite3
 mydata.json
 mydata.xml
