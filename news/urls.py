@@ -1,4 +1,5 @@
 from django.urls import path, include
+from rest_framework import routers
 # Импортируем созданное нами представление
 from .views import (
    PostsList,

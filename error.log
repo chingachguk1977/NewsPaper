@@ -4550,3 +4550,124 @@ ERROR 2022-08-02 07:23:02,453 "GET /admin/news/post/ HTTP/1.1" 500 145 /home/chi
 ERROR 2022-08-02 07:23:30,591 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
 ERROR 2022-08-02 09:47:12,045 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
 ERROR 2022-08-02 09:47:59,777 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 08:33:48,207 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 08:35:25,905 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 08:35:38,545 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 08:38:22,625 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 08:39:07,753 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 08:39:39,764 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 08:48:54,185 Internal Server Error: /admin/news/post/ /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/log.py (<class 'TypeError'>, TypeError('gettext() takes 1 positional argument but 2 were given'), <traceback object at 0x7f13bc210bc0>)
+Traceback (most recent call last):
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/backends/django.py", line 62, in render
+    return self.template.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/contrib/admin/templatetags/base.py", line 45, in render
+    return super().render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/library.py", line 280, in render
+    return t.render(new_context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 177, in render
+    return self._render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1000, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 958, in render_annotated
+    return self.render(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 1059, in render
+    output = self.filter_expression.resolve(context)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/base.py", line 739, in resolve
+    new_obj = func(obj, *arg_vals)
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/template/defaultfilters.py", line 44, in _dec
+    args[0] = str(args[0])
+  File "/home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/utils/functional.py", line 147, in __text_cast
+    return func(*self.__args, **self.__kw)
+TypeError: gettext() takes 1 positional argument but 2 were given
+ERROR 2022-08-08 08:48:54,186 "GET /admin/news/post/ HTTP/1.1" 500 500160 /home/chingachguk1977/PycharmProjects/news_portal/venv/lib/python3.10/site-packages/django/core/servers/basehttp.py None
+ERROR 2022-08-08 08:51:34,517 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:03:11,901 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:03:34,165 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:06:05,439 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:07:25,416 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:07:35,505 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:09:12,583 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:09:36,898 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:12:16,300 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:13:09,216 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:26:35,181 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:27:44,526 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None
+ERROR 2022-08-08 09:38:31,844 Hello! I'm an error in your app. Enjoy:) /home/chingachguk1977/PycharmProjects/news_portal/NewsPaper/NewsPaper/urls.py None

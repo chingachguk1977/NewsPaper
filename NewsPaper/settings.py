@@ -31,7 +31,7 @@ load_dotenv(dotenv_path)
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     # ... include the providers you want to enable:
     'allauth.socialaccount.providers.google',
     'news.apps.NewsConfig',
+    'rest_framework',
 ]
 
 SITE_ID = 1
@@ -117,6 +118,15 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+REST_FRAMEWORK = {
+   'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+   'PAGE_SIZE': 10,
+   'DEFAULT_PERMISSION_CLASSES': [
+       'rest_framework.permissions.IsAuthenticated',
+   ]
+}
+
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -125,7 +135,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
         'OPTIONS': {'timeout': 5, },
-        'TIME_ZONE': 'UTC',
+        # 'TIME_ZONE': 'UTC',
     }
 }
 

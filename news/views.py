@@ -41,9 +41,27 @@ from .forms import PostForm
 
 from .tasks import new_post_subscription
 
+from rest_framework import viewsets
+from rest_framework import permissions
+
+from .serializers import (
+    PostSerializer,
+    CategorySerializer,
+)
+
+
+# Views for DRF
+class PostViewset(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class CategoryViewest(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
 
 # Create your views here.
-
 class PostsList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Post
     permission_required = (
@@ -139,7 +157,7 @@ class PostCreate(PermissionRequiredMixin, CreateView):
         for post in posts:
             if post.author == postauthor:
                 time_delta = datetime.now().date() - post.time_pub.date()
-                if time_delta.total_seconds() < (60*60*24):
+                if time_delta.total_seconds() < (60 * 60 * 24):
                     today_posts_count += 1
 
         if today_posts_count < DAILY_POST_LIMIT:
@@ -147,7 +165,7 @@ class PostCreate(PermissionRequiredMixin, CreateView):
             id_new_post = self.object.id
             # print(id_new_post)
             print('notifying subscribers from view (no signals)...', id_new_post)
-            new_post_subscription.apply_async([id_new_post], countdown = 5)
+            new_post_subscription.apply_async([id_new_post], countdown=5)
 
             # cat = Category.objects.get(pk=self.request.POST['cats'])
             # self.object.cats.add(cat)
