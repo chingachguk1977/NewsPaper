@@ -16,9 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-
+from rest_framework import routers
+from news.views import (
+    PostViewset,
+    CategoryViewest,
+)
 import logging
 
+router = routers.DefaultRouter()
+router.register(r'posts', PostViewset)
+router.register(r'categories', CategoryViewest)
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),  # встроенные end-points для локализации
@@ -27,6 +34,10 @@ urlpatterns = [
     path('', include('protect.urls')),
     path('sign/', include('sign.urls')),
     path('accounts/', include('allauth.urls')),
+
+    path('routers', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
     # path('profiles/', include('news.urls')),
     # path('', include('django.contrib.auth.urls')),
     # path('login/', auth_views.LoginView.as_view()),
